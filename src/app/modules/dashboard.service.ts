@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as Highcharts from 'highcharts';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +7,7 @@ export class DashboardService {
 
   constructor() { }
 
-  bigChart() {
+  tweetTimeSeries() {
     return [
       [
         0,
@@ -104,9 +103,36 @@ export class DashboardService {
       ],
       [
         23,
-        6 
+        6
       ],
-      ]
+    ]
+  }
+
+  wordCloudData() {
+    return [{
+      name: 'Lorem',
+      weight: 3
+    }, {
+      name: 'Ipsum',
+      weight: 2
+    }, {
+      name: 'Dolor',
+      weight: 1
+    }]
+  }
+
+  topUsers() {
+    let users: string[] = [
+      "mahsa", "mahsa", "mahsa"
+    ];
+    return users;
+  }
+
+  topKeywords() {
+    let keywords: string[] = [
+      "security", "cybercriminal", "malware"
+    ];
+    return keywords;
   }
 
   cards() {
