@@ -8,12 +8,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule, MatDividerModule, MatCardModule, MatPaginatorModule, MatTableModule, MatListModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from 'src/app/modules/dashboard.service';
+import { AccountsComponent } from 'src/app/modules/accounts/accounts.component';
+import { KeywordsComponent } from 'src/app/modules/keywords/keywords.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    PostsComponent
+    PostsComponent,
+    AccountsComponent,
+    KeywordsComponent
   ],
   imports: [
     CommonModule,
