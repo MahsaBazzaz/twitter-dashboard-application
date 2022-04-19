@@ -14,8 +14,10 @@ export class DashboardComponent implements OnInit {
   pieChart = [];
   topUsers : string[];
   topKeywords : string[];
+  topTweets : string[];
   topUserCol: string[] = ['name'];
   topKeywordCol: string[] = ['keyword'];
+  topTweetsCol: string[] = ['tweets'];
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -26,6 +28,7 @@ export class DashboardComponent implements OnInit {
     this.pieChart = this.dashboardService.pieChart();
     this.topUsers = this.dashboardService.topUsers();
     this.topKeywords = this.dashboardService.topKeywords();
+    this.topTweets = this.dashboardService.topTweets();
   }
 
 }

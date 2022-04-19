@@ -135,6 +135,13 @@ export class DashboardService {
     return keywords;
   }
 
+  topTweets() {
+    let tweets: string[] = [
+      "hi malware!", "this is a sample tweet with top security info.", "don't come after me i'm a hacker."
+    ];
+    return tweets;
+  }
+
   cards() {
     return [71, 78, 39, 66];
   }
