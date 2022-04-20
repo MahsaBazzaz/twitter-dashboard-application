@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ResponseSchema, User } from 'src/dtos';
+import { AccountsService } from './accounts.service';
 
 @Component({
   selector: 'app-accounts',
@@ -8,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class AccountsComponent implements OnInit {
 
   name = "username";
-  constructor() { }
+  constructor(private accountsService: AccountsService) { }
 
   ngOnInit() {
+    this.getAllUsers();
   }
 
+  getAllUsers() {
+    this.accountsService.getAllUsers()
+      .subscribe((data: ResponseSchema<User[]>) => {
+        console.log(data);
+      });
+  }
 }
