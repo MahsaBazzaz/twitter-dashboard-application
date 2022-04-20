@@ -1,13 +1,9 @@
-.search-hero {
+input {
+    padding: .5rem;
     width: 100%;
-    height: 50px;
+    display: block;
 }
 
-.form-control {
-    width: 100%;
-    padding: 7px;
-}
-
-.form-control::placeholder {
-    font-family: FontAwesome;
+input:focus {
+    outline: #336699 auto 1px;
 }

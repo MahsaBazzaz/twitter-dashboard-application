@@ -1,6 +1,7 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { KeywordComponent } from 'src/app/shared/components/keyword/keyword.component';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
+import { keyword } from 'src/dtos';
 import { KeywordsService } from './keywords.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { KeywordsService } from './keywords.service';
 export class KeywordsComponent implements OnInit {
   
   @ViewChild("container", { read: ViewContainerRef, static: true }) container: ViewContainerRef;
-
+  @Output() e = new EventEmitter<keyword[]>();
 
   name = "keyword"
   ishttpLoaded: boolean = false;
@@ -25,7 +26,7 @@ export class KeywordsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.container)
+    // console.log(this.container)
     this.spinner.returnAsObservable().subscribe(
       subs => {
         this.ishttpLoaded = subs;
@@ -45,9 +46,10 @@ export class KeywordsComponent implements OnInit {
       subscribe(
         response => {
           if (response.status) {
+            this.onNewPosts(response.data);
             response.data.forEach(element => {
-              console.log(this.container);
-              console.log(response.data)
+              // console.log(this.container);
+              // console.log(response.data)
               const dyynamicComponent = <KeywordComponent>this.container.createComponent(this.componentFactory).instance;
               dyynamicComponent.keyword = element.word;
             });
@@ -55,6 +57,9 @@ export class KeywordsComponent implements OnInit {
         },
         err => { },
         () => { })
+  }
+  onNewPosts(msg: keyword[]) {
+    this.e.emit(msg);
   }
 
 }

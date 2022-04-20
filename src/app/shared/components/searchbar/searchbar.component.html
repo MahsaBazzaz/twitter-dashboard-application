@@ -1,3 +1,1 @@
-<div class="search-hero">
-    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching for a hero by id or name or country">
-</div>
+<input #searchBox id="search-box" (change)="search(searchBox.value)" />

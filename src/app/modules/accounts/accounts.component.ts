@@ -16,7 +16,7 @@ export class AccountsComponent implements OnInit {
   isLoaded: boolean = false;
   constructor(private accountsService: AccountsService, private spinner: SpinnerService) { }
   ngOnInit() {
-    console.log(this.container)
+    // console.log(this.container)
     this.spinner.returnAsObservable().subscribe(
       subs => {
         this.ishttpLoaded = subs;
@@ -33,7 +33,7 @@ export class AccountsComponent implements OnInit {
         response => {
           if (response.status) {
             response.data.forEach(element => {
-              this.container.nativeElement.innerHTML += `<app-useraccount [username]="${element.user_name}", [detail]=""></app-useraccount>`;
+              // this.container.nativeElement.innerHTML += `<app-useraccount [username]="${element.user_name}", [detail]=""></app-useraccount>`;
             });
           }
         },

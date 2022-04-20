@@ -56,7 +56,7 @@ import { KeywordComponent } from './components/keyword/keyword.component';
     HighchartsChartModule,
     FormsModule,
     NgbModule,
-    BrowserModule
+    BrowserModule,
   ],
   exports: [
     HeaderComponent,
