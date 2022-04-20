@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { BasicmodalComponent } from './components/basicmodal/basicmodal.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SearchbarComponent,
     TweetComponent,
     UseraccountComponent,
-    BasicmodalComponent
+    BasicmodalComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SearchbarComponent,
     TweetComponent,
     UseraccountComponent,
-    BasicmodalComponent
+    BasicmodalComponent,
+    SpinnerComponent
   ],
   bootstrap: [BasicmodalComponent]
 })

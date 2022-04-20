@@ -1,28 +1,44 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { ResponseSchema, User } from 'src/dtos';
 import { AccountsService } from './accounts.service';
 
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
-  // template: `<div #container></div>`,
   styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
 
-  // @ViewChild("tref", {read: ElementRef}) tref: ElementRef;
-  name = "username";
-  constructor(private accountsService: AccountsService) { }
-
+  @ViewChild("container", { static: false }) container: ElementRef;
+  name = "account"
+  ishttpLoaded: boolean = false;
+  isLoaded: boolean = false;
+  constructor(private accountsService: AccountsService, private spinner: SpinnerService) { }
   ngOnInit() {
-    // this.getAllUsers();
+    console.log(this.container)
+    this.spinner.returnAsObservable().subscribe(
+      subs => {
+        this.ishttpLoaded = subs;
+      })
   }
 
-  getAllUsers() {
-    this.accountsService.getAllUsers()
-      .subscribe((data: ResponseSchema<User[]>) => {
-        console.log(data);
-        // <app-useraccount [username]="" [detail]=""></app-useraccount>
-      });
+  ngAfterViewInit() {
+    // this.getData();
+  }
+
+  getData() {
+    this.accountsService.getAllUsers().
+      subscribe(
+        response => {
+          if (response.status) {
+            response.data.forEach(element => {
+              this.container.nativeElement.innerHTML += `<app-useraccount [username]="${element.user_name}", [detail]=""></app-useraccount>`;
+            });
+          }
+        },
+        err => { },
+        () => { })
   }
 }
+

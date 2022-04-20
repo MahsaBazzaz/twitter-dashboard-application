@@ -11,7 +11,7 @@ export class AccountsService {
 
     constructor(private http: HttpClient) { }
 
-    getAllUsers() {
+    getAllUsers() : Observable<ResponseSchema<User[]>>{
         return this.http.get<ResponseSchema<User[]>>("http://127.0.0.1:3000/getAllUsers");
     }
 }
