@@ -11,7 +11,6 @@ export class DashboardComponent implements OnInit {
   tweetsTimeseries = [];
   wordcloudData = [];
   cards = [];
-  pieChart = [];
   topUsers : string[];
   topKeywords : string[];
   topTweets : string[];
@@ -25,7 +24,6 @@ export class DashboardComponent implements OnInit {
     this.tweetsTimeseries = this.dashboardService.tweetTimeSeries();
     this.wordcloudData = this.dashboardService.wordCloudData();
     this.cards = this.dashboardService.cards();
-    this.pieChart = this.dashboardService.pieChart();
     this.topUsers = this.dashboardService.topUsers();
     this.topKeywords = this.dashboardService.topKeywords();
     this.topTweets = this.dashboardService.topTweets();

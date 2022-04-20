@@ -10,7 +10,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { AreaComponent } from './widgets/area/area.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { PieComponent } from './widgets/pie/pie.component';
 import { WordcloudComponent } from './widgets/wordcloud/wordcloud.component';
 
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
@@ -30,7 +29,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     SidebarComponent,
     AreaComponent,
-    PieComponent,
     WordcloudComponent,
     SearchbarComponent,
     TweetComponent,
@@ -60,7 +58,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     SidebarComponent,
     AreaComponent,
-    PieComponent,
     WordcloudComponent,
     SearchbarComponent,
     TweetComponent,
