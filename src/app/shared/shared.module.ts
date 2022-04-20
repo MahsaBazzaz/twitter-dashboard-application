@@ -23,6 +23,7 @@ import { BasicmodalComponent } from './components/basicmodal/basicmodal.componen
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { KeywordComponent } from './components/keyword/keyword.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,10 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     TweetComponent,
     UseraccountComponent,
     BasicmodalComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    KeywordComponent
   ],
+  entryComponents: [TweetComponent],
   imports: [
     BrowserModule,
     Ng2SearchPipeModule,
@@ -65,7 +68,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     TweetComponent,
     UseraccountComponent,
     BasicmodalComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    KeywordComponent
   ],
   bootstrap: [BasicmodalComponent]
 })
