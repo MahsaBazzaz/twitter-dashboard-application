@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KeywordsComponent implements OnInit {
 
+  name = "keyword"
   constructor() { }
 
   ngOnInit() {
