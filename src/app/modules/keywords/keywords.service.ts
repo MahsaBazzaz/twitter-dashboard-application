@@ -11,7 +11,7 @@ export class KeywordsService {
     
     constructor(private http: HttpClient) { }
 
-    getAllUsers() : Observable<ResponseSchema<keyword[]>>{
+    getAllKeywords() : Observable<ResponseSchema<keyword[]>>{
         return this.http.get<ResponseSchema<keyword[]>>("http://127.0.0.1:3000/getAllKeywords");
     }
 }

@@ -1,5 +1,5 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { MatCardModule } from '@angular/material';
+import { KeywordComponent } from 'src/app/shared/components/keyword/keyword.component';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { KeywordsService } from './keywords.service';
 
@@ -16,7 +16,7 @@ export class KeywordsComponent implements OnInit {
   name = "keyword"
   ishttpLoaded: boolean = false;
   isLoaded: boolean = false;
-  componentFactory: ComponentFactory<MatCardModule>;
+  componentFactory: ComponentFactory<KeywordComponent>;
   containerRef: ViewContainerRef;
 
   constructor(private viewContainerRef: ViewContainerRef,
@@ -33,7 +33,7 @@ export class KeywordsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.componentFactory = this.componentFactoryResolver.resolveComponentFactory(MatCardModule);
+    this.componentFactory = this.componentFactoryResolver.resolveComponentFactory(KeywordComponent);
     this.containerRef = this.viewContainerRef;
     this.containerRef.clear();
     this.getData();
@@ -41,15 +41,15 @@ export class KeywordsComponent implements OnInit {
 
   getData() {
     this.container.clear();
-    this.service.getAllUsers().
+    this.service.getAllKeywords().
       subscribe(
         response => {
           if (response.status) {
             response.data.forEach(element => {
               console.log(this.container);
               console.log(response.data)
-              const dyynamicComponent = <MatCardModule>this.container.createComponent(this.componentFactory).instance;
-              
+              const dyynamicComponent = <KeywordComponent>this.container.createComponent(this.componentFactory).instance;
+              dyynamicComponent.keyword = element.word;
             });
           }
         },
