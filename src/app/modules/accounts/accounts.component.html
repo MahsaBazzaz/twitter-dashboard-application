@@ -1,22 +1,17 @@
-<div fxLayout="row" gdAligns="center stretch">
-    <div fxFlex="5">
+<div id="container">
+    <div fxLayout="row" gdAligns="center stretch">
+        <div fxFlex="5">
+        </div>
+        <mat-icon>search</mat-icon>
+        <div fxFlex="70">
+            <app-searchbar></app-searchbar>
+        </div>
+        <div fxFlex="10">
+            <app-basicmodal [name]="name"></app-basicmodal>
+        </div>
     </div>
-    <mat-icon>search</mat-icon>
-    <div fxFlex="70">
-        <app-searchbar></app-searchbar>
-    </div>
-    <div fxFlex="10">
-        <!-- <button mat-button color="primary">Add New Account</button> -->
-        <app-basicmodal [name]="name"></app-basicmodal>
-    </div>
+
+    <br>
+    <mat-divider></mat-divider>
+    <br>
 </div>
-
-<br>
-<mat-divider></mat-divider>
-<br>
-
-<app-useraccount></app-useraccount>
-<app-useraccount></app-useraccount>
-<app-useraccount></app-useraccount>
-<app-useraccount></app-useraccount>
-<app-useraccount></app-useraccount>
