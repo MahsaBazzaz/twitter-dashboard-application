@@ -14,13 +14,11 @@ import { PostsService } from './posts.service';
 export class PostsComponent implements OnInit {
 
   @ViewChild("container", { read: ViewContainerRef, static: true }) tweetsContainer: ViewContainerRef;
-  // @ViewChild("searchbarContainer", { read: ViewContainerRef, static: true }) searchbarContainer: ViewContainerRef;
 
   name = "account"
   ishttpLoaded: boolean = false;
   isLoaded: boolean = false;
   tweetFactory: ComponentFactory<TweetComponent>;
-  searchbarFactory: ComponentFactory<SearchbarComponent>;
 
   constructor(private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -51,7 +49,6 @@ export class PostsComponent implements OnInit {
   }
 
   getAllTweets() {
-    this.tweetsContainer.clear();
     this.service.getAllTweets().
       subscribe(
         response => {
@@ -60,6 +57,7 @@ export class PostsComponent implements OnInit {
   }
 
   showTweets(data: Tweet[]) {
+    this.tweetsContainer.clear();
     data.forEach(element => {
       const dyynamicTweet = <TweetComponent>this.tweetsContainer.createComponent(this.tweetFactory).instance;
       //TODO: user photo

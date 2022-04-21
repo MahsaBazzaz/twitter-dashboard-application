@@ -14,4 +14,8 @@ export class AccountsService {
     getAllUsers() : Observable<ResponseSchema<User[]>>{
         return this.http.get<ResponseSchema<User[]>>("http://127.0.0.1:3000/getAllUsers");
     }
+
+    search(term: string): Observable<ResponseSchema<User[]>> {
+        return this.http.post<ResponseSchema<User[]>>("http://127.0.0.1:3000/searchUser", { "username": term });
+    }
 }

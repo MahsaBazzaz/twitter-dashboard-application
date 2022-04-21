@@ -1,18 +1,19 @@
 <app-spinner [loading]='isLoaded' [httploading]='ishttpLoaded'></app-spinner>
 
-<div #container>
-    <div fxLayout="row" gdAligns="center stretch">
-        <div fxFlex="5">
-        </div>
-        <mat-icon>search</mat-icon>
-        <div fxFlex="70">
-            <!-- <app-searchbar></app-searchbar> -->
-        </div>
-        <div fxFlex="10">
-            <app-basicmodal [name]="name"></app-basicmodal>
-        </div>
+<div fxLayout="row" gdAligns="center stretch">
+    <div fxFlex="5">
     </div>
-    <br>
-    <mat-divider></mat-divider>
-    <br>
+    <mat-icon>search</mat-icon>
+    <div fxFlex="70">
+        <app-searchbar></app-searchbar>
+    </div>
+    <div fxFlex="10">
+        <app-basicmodal [name]="name"></app-basicmodal>
+    </div>
+</div>
+<br>
+<mat-divider></mat-divider>
+<br>
+<div #container>
+
 </div>

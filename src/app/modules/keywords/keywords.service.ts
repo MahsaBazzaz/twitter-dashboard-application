@@ -14,4 +14,8 @@ export class KeywordsService {
     getAllKeywords() : Observable<ResponseSchema<keyword[]>>{
         return this.http.get<ResponseSchema<keyword[]>>("http://127.0.0.1:3000/getAllKeywords");
     }
+
+    search(term: string): Observable<ResponseSchema<keyword[]>> {
+        return this.http.post<ResponseSchema<keyword[]>>("http://127.0.0.1:3000/serachKeywords", { "keyword": term });
+    }
 }
