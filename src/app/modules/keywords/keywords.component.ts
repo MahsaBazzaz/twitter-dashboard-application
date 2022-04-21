@@ -1,4 +1,5 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.service';
 import { KeywordComponent } from 'src/app/shared/components/keyword/keyword.component';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
@@ -25,6 +26,7 @@ export class KeywordsComponent implements OnInit {
     private componentFactoryResolver: ComponentFactoryResolver,
     private service: KeywordsService,
     private spinner: SpinnerService,
+    private modalService : ModalService,
     private searchService: SearchbarService) {
   }
 
@@ -39,6 +41,15 @@ export class KeywordsComponent implements OnInit {
         this.service.search(data).subscribe(
           response => {
             if (response.status) this.showKeywords(response.data);
+          }, err => { }, () => { }
+        )
+      });
+    
+      this.modalService.aClickedEvent
+      .subscribe((data: string) => {
+        this.service.add(data).subscribe(
+          response => {
+            if (response.status) this.getAllKeywords();
           }, err => { }, () => { }
         )
       });

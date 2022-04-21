@@ -3,12 +3,12 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class SearchbarService {
+export class ModalService {
 
     @Output() aClickedEvent = new EventEmitter<string>();
     constructor() { }
 
-    search(term: string) {
+    emitevent(term: string) {
         this.aClickedEvent.emit(term);
     }
 

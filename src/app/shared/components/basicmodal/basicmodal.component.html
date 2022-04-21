@@ -1,16 +1,16 @@
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #content>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        <h4 class="modal-title" id="modal-basic-title">Add New {{name}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="dismis()"></button>
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <label for="name">{{name}}</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <label for="myinput">{{name}}</label>
+            <input type="text" class="form-control" id="myinput" #myinput>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Add</button>
+        <button type="button" class="btn btn-outline-dark" (click)="save(myinput.value)">Add</button>
     </div>
 </ng-template>
 

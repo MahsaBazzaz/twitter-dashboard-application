@@ -1,4 +1,5 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.service';
 import { SearchbarComponent } from 'src/app/shared/components/searchbar/searchbar.component';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
