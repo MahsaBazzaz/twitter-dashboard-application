@@ -5,7 +5,7 @@ export interface ResponseSchema<T> {
 export interface User {
     id: number,
     user_id : bigint,
-    user_name : string
+    username : string
 }
 export interface Tweet {
     id: number,

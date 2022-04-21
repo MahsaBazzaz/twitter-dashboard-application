@@ -1,4 +1,5 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.service';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { UseraccountComponent } from 'src/app/shared/components/useraccount/useraccount.component';
@@ -23,7 +24,8 @@ export class AccountsComponent implements OnInit {
     private spinner: SpinnerService,
     private searchService: SearchbarService,
     private viewContainerRef: ViewContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver) { }
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private modalService : ModalService) { }
   ngOnInit() {
     this.spinner.returnAsObservable().subscribe(
       subs => {
@@ -35,6 +37,15 @@ export class AccountsComponent implements OnInit {
         this.service.search(data).subscribe(
           response => {
             if (response.status) this.showUsers(response.data);
+          }, err => { }, () => { }
+        )
+      });
+    
+      this.modalService.aClickedEvent
+      .subscribe((data: string) => {
+        this.service.add(data).subscribe(
+          response => {
+            if (response.status) this.getAllUsers();
           }, err => { }, () => { }
         )
       });
@@ -57,10 +68,10 @@ export class AccountsComponent implements OnInit {
   }
 
   showUsers(data: User[]) {
+    this.container.clear();
     data.forEach(element => {
-      this.container.clear();
       const dyynamicComponent = <UseraccountComponent>this.container.createComponent(this.componentFactory).instance;
-      dyynamicComponent.username = element.user_name;
+      dyynamicComponent.username = element.username;
       dyynamicComponent.aClickedEvent.subscribe((data: string) => {
         this.service.remove(data).subscribe(
           response => {

@@ -6,12 +6,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   <mat-card-header>
       <mat-icon mat-card-avatar class="example-header-image"></mat-icon>
       <mat-card-subtitle>{{ username }}</mat-card-subtitle>
+      <button type="button" class="btn btn-sml" (click)="remove()" style="position: absolute; right: 0;"><mat-icon>close</mat-icon></button>
   </mat-card-header>
   <br>
-  <mat-card-content>
-  <button type="button" class="btn btn-sml" (click)="remove()" style="display: inline;"><mat-icon>close</mat-icon></button>
-      <p style="display: inline;">{{ detail }}</p>
-  </mat-card-content>
+    <!-- <mat-card-content>
+        <p style="display: inline;">{{ detail }}</p>
+    </mat-card-content> -->
+  <mat-card-actions>
+  </mat-card-actions>
 </mat-card>
 <br>`,
   styleUrls: ['./useraccount.component.scss']

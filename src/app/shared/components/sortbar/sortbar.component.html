@@ -1,0 +1,16 @@
+<table class="sortbar">
+    <tr>
+        <th>
+            <button ng-click="sortBy('name')"><mat-icon>favorite</mat-icon></button>
+            <span class="sortorder" ng-show="propertyName === 'likes'" ng-class="{reverse: reverse}"></span>
+        </th>
+        <th>
+            <button ng-click="sortBy('phone')"><mat-icon>find_replace</mat-icon></button>
+            <span class="sortorder" ng-show="propertyName === 'retweet'" ng-class="{reverse: reverse}"></span>
+        </th>
+        <th>
+            <button ng-click="sortBy('age')"><mat-icon>date_range</mat-icon></button>
+            <span class="sortorder" ng-show="propertyName === 'date'" ng-class="{reverse: reverse}"></span>
+        </th>
+    </tr>
+</table>
