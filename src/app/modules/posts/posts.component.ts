@@ -2,6 +2,7 @@ import { Component, ComponentFactory, ComponentFactoryResolver, ElementRef, Even
 import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.service';
 import { SearchbarComponent } from 'src/app/shared/components/searchbar/searchbar.component';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
+import { SortbarService } from 'src/app/shared/components/sortbar/sortbar.service';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { TweetComponent } from 'src/app/shared/components/tweet/tweet.component';
 import { Tweet } from 'src/dtos';
@@ -25,7 +26,8 @@ export class PostsComponent implements OnInit {
     private componentFactoryResolver: ComponentFactoryResolver,
     private service: PostsService,
     private searchbarService: SearchbarService,
-    private spinner: SpinnerService) {
+    private spinner: SpinnerService,
+    private sortbarService: SortbarService) {
   }
 
   ngOnInit() {
@@ -37,6 +39,31 @@ export class PostsComponent implements OnInit {
     this.searchbarService.aClickedEvent
       .subscribe((data: string) => {
         this.service.search(data).subscribe(
+          response => {
+            if (response.status) this.showTweets(response.data);
+          }, err => { }, () => { }
+        )
+      });
+
+    this.sortbarService.aClickedEvent
+      .subscribe((data: { by: string, order: boolean }) => {
+        if (data.by == "likes") {
+          this.service.sortByLikes(data.order).subscribe(
+            response => {
+              if (response.status) this.showTweets(response.data);
+            }, err => { }, () => { }
+          )
+        }
+        else if (data.by == "retweets") {
+          this.service.sortByRetweets(data.order).subscribe(
+            response => {
+              if (response.status) this.showTweets(response.data);
+            }, err => { }, () => { }
+          )
+        }
+        else if (data.by == "date") {
+        }
+        this.service.sortByDate(data.order).subscribe(
           response => {
             if (response.status) this.showTweets(response.data);
           }, err => { }, () => { }

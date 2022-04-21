@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SortbarService } from './sortbar.service';
 
 @Component({
   selector: 'app-sortbar',
@@ -6,25 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sortbar.component.scss']
 })
 export class SortbarComponent implements OnInit {
-  propertyName = "";
-  reverse = false;
-  constructor() { }
+  reverse : boolean = true;
+  param : string = "date";
+  constructor(private service: SortbarService) { }
 
   ngOnInit() {
   }
 
-  sortBy(param: string) {
-    if (param == "likes") {
-      console.log("sort by likes")
-      this.propertyName = "likes";
-    }
-    else if (param == "retweet") {
-      console.log("sort by retweet")
-      this.propertyName = "retweet";
-    }
-    else if (param == "date") {
-      console.log("sort by date")
-      this.propertyName = "date";
-    }
+  order() {
+    this.reverse = (!this.reverse);
+    this.sortBy(this.param);
+  }
+
+  sortBy(param) {
+    this.param = param;
+    this.service.sort(param.value, this.reverse);
   }
 }

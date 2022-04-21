@@ -1,16 +1,15 @@
-<table class="sortbar">
-    <tr>
-        <th>
-            <button ng-click="sortBy('name')"><mat-icon>favorite</mat-icon></button>
-            <span class="sortorder" ng-show="propertyName === 'likes'" ng-class="{reverse: reverse}"></span>
-        </th>
-        <th>
-            <button ng-click="sortBy('phone')"><mat-icon>find_replace</mat-icon></button>
-            <span class="sortorder" ng-show="propertyName === 'retweet'" ng-class="{reverse: reverse}"></span>
-        </th>
-        <th>
-            <button ng-click="sortBy('age')"><mat-icon>date_range</mat-icon></button>
-            <span class="sortorder" ng-show="propertyName === 'date'" ng-class="{reverse: reverse}"></span>
-        </th>
-    </tr>
-</table>
+<button (click)="order('retweet')" class="sortButton">
+    <mat-icon [ngClass]="reverse ? 'hideIcon' : 'showIcon'">keyboard_arrow_down</mat-icon>
+    <mat-icon [ngClass]="reverse ? 'showIcon' : 'hideIcon'">keyboard_arrow_up</mat-icon>
+</button>
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="sortBy($event)">
+    <mat-button-toggle value="likes">
+        <mat-icon>favorite</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="retweets">
+        <mat-icon>find_replace</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="date">
+        <mat-icon>date_range</mat-icon>
+    </mat-button-toggle>
+</mat-button-toggle-group>

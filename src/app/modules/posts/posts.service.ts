@@ -18,4 +18,17 @@ export class PostsService {
     search(term: string): Observable<ResponseSchema<Tweet[]>> {
         return this.http.post<ResponseSchema<Tweet[]>>("http://127.0.0.1:3000/serachTweetByKeyword", { "keyword": term });
     }
+
+    sortByLikes(order: boolean): Observable<ResponseSchema<Tweet[]>> {
+        return this.http.post<ResponseSchema<Tweet[]>>("http://127.0.0.1:3000/sortTweetsByLikes", { "order": order });
+    }
+
+    sortByRetweets(order: boolean): Observable<ResponseSchema<Tweet[]>> {
+        return this.http.post<ResponseSchema<Tweet[]>>("http://127.0.0.1:3000/sortTweetsByRetweets", { "order": order });
+    }
+
+    sortByDate(order: boolean): Observable<ResponseSchema<Tweet[]>> {
+
+        return this.http.post<ResponseSchema<Tweet[]>>("http://127.0.0.1:3000/sortTweetsByDate", { "order": order });
+    }
 }

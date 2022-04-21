@@ -1,11 +1,13 @@
-.sortbar {
-    border-collapse: collapse;
+.sortButton {
+    outline: none;
+    border: none;
+    background-color: white;
 }
 
-.sortorder:after {
-    content: '\25b2'; // BLACK UP-POINTING TRIANGLE
+.hideIcon {
+    display: none;
 }
 
-.sortorder.reverse:after {
-    content: '\25bc'; // BLACK DOWN-POINTING TRIANGLE
+.showIcon {
+    display: inline;
 }
