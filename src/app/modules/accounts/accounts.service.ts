@@ -18,4 +18,12 @@ export class AccountsService {
     search(term: string): Observable<ResponseSchema<User[]>> {
         return this.http.post<ResponseSchema<User[]>>("http://127.0.0.1:3000/searchUser", { "username": term });
     }
+
+    add(username: string): Observable<ResponseSchema<User>> {
+        return this.http.post<ResponseSchema<User>>("http://127.0.0.1:3000/addUser", { "username": username });
+    }
+
+    remove(username: string): Observable<ResponseSchema<any>> {
+        return this.http.post<ResponseSchema<any>>("http://127.0.0.1:3000/removeUser", { "username": username });
+    }
 }

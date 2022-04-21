@@ -75,6 +75,14 @@ export class KeywordsComponent implements OnInit {
     data.forEach(element => {
       const dyynamicComponent = <KeywordComponent>this.container.createComponent(this.componentFactory).instance;
       dyynamicComponent.keyword = element.word;
+      dyynamicComponent.aClickedEvent
+      .subscribe((data: string) => {
+        this.service.remove(data).subscribe(
+          response => {
+            if (response.status) this.getAllKeywords();
+          }, err => { }, () => { }
+        )
+      });
     });
   }
 

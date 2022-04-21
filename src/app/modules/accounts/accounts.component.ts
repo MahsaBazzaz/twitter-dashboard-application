@@ -58,9 +58,16 @@ export class AccountsComponent implements OnInit {
 
   showUsers(data: User[]) {
     data.forEach(element => {
-      this.containerRef.clear();
+      this.container.clear();
       const dyynamicComponent = <UseraccountComponent>this.container.createComponent(this.componentFactory).instance;
       dyynamicComponent.username = element.user_name;
+      dyynamicComponent.aClickedEvent.subscribe((data: string) => {
+        this.service.remove(data).subscribe(
+          response => {
+            if (response.status) this.getAllUsers();
+          }, err => { }, () => { }
+        )
+      });
     });
   }
 }
