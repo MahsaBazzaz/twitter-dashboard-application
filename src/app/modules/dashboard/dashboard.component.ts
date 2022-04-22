@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
+import { Tweet } from 'src/dtos';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -10,23 +12,46 @@ export class DashboardComponent implements OnInit {
 
   tweetsTimeseries = [];
   wordcloudData = [];
-  // cards = [];
-  topUsers : string[];
-  topKeywords : string[];
-  topTweets : string[];
+  topUsers: string[];
+  topKeywords: string[];
+  topTweets: Tweet[];
   topUserCol: string[] = ['name'];
   topKeywordCol: string[] = ['keyword'];
   topTweetsCol: string[] = ['tweets'];
 
-  constructor(private dashboardService: DashboardService) { }
+  ishttpLoaded: boolean = false;
+  isLoaded: boolean = false;
+
+  constructor(private dashboardService: DashboardService,
+    private spinner: SpinnerService,) { }
 
   ngOnInit() {
-    this.tweetsTimeseries = this.dashboardService.tweetTimeSeries();
-    this.wordcloudData = this.dashboardService.wordCloudData();
-    // this.cards = this.dashboardService.cards();
-    this.topUsers = this.dashboardService.topUsers();
-    this.topKeywords = this.dashboardService.topKeywords();
-    this.topTweets = this.dashboardService.topTweets();
-  }
+    this.spinner.returnAsObservable().subscribe(subs => {
+      this.ishttpLoaded = subs;
+    });
+    this.dashboardService.tweetTimeSeries().subscribe(data => {
+      this.tweetsTimeseries = data
+      console.log(this.tweetsTimeseries)
+    });
+    this.dashboardService.wordCloudData().subscribe(data => {
+      this.wordcloudData = data
+      console.log(this.wordcloudData)
+    });
+    this.dashboardService.topUsers().subscribe(data => {
+      this.topUsers = data
+      console.log(this.topUsers)
+    });
+    this.dashboardService.topKeywords().subscribe(data => {
+      this.topKeywords = data
+      console.log(this.topKeywords)
+    });
+    this.dashboardService.topTweets().subscribe(data => {
+      this.topTweets = data
+      console.log(this.topTweets)
 
+    });
+  }
+  ngAfterViewInit() {
+
+  }
 }
