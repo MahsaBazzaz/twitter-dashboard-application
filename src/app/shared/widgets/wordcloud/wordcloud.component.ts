@@ -1,45 +1,65 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import wordcloud from 'highcharts/modules/wordcloud.js';
+import { Observable } from 'rxjs';
+import { DashboardService } from 'src/app/modules/dashboard/dashboard.service';
+import { ResponseSchema, Token } from 'src/dtos';
 wordcloud(Highcharts);
 
 @Component({
   selector: 'app-wordcloud',
-  templateUrl: './wordcloud.component.html',
+  template: `<highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" style="width: 100%; height: 300px; display: block;"></highcharts-chart>`,
   styleUrls: ['./wordcloud.component.scss']
 })
-export class WordcloudComponent implements OnInit {
+export class WordcloudComponent {
   chartOptions: {};
-  @Input() data: any = [];
-
+  @Input() data: { name: string; weight: number; }[] = [];
   Highcharts = Highcharts;
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef, private dashboardService: DashboardService) { }
 
-  ngOnInit() {
-    this.chartOptions = {
-      accessibility: {
-        screenReaderSection: {
-          beforeChartFormat: '<h5>{chartTitle}</h5>'
-        }
-      },
-      series: [{
-        type: 'wordcloud',
-        data: this.data,
-        name: 'Occurrences'
-      }],
-      title: {
-        text: 'Wordcloud of Tweets'
-      }
-    };
-      HC_exporting(Highcharts);
+  chartRef: Highcharts.Chart;
 
-      setTimeout(() => {
-        window.dispatchEvent(
-          new Event('resize')
-        );
-      }, 300);
+  chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
+    this.chartRef = chart;
+  };
+
+  fetchData(): Observable<ResponseSchema<Token[]>> {
+    return this.dashboardService.wordCloudData();
   }
 
+  chartLazyLoading: Highcharts.Options = {
+    chart: {
+      type: 'wordcloud',
+      
+      events: {
+        load: () => {
+          const chart = this.chartRef;
+          const data = this.fetchData()
+            .subscribe((data: ResponseSchema<Token[]>) => {
+              let t: { name: string; weight: number; }[] = [];
+              if (data.status) {
+                data.data.forEach(element => {
+                  t.push({ name: element.token, weight: element.count });
+                });
+                chart.addSeries({
+                  type: 'wordcloud',
+                  data: t,
+                  name: 'Occurrences',
+                }, false);
+
+                chart.update({
+                  navigator: {
+                    series: {
+                      data: t
+                    }
+                  }
+                });
+              }
+            });
+        }
+      },
+    },
+  };
 }
