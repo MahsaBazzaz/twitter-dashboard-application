@@ -46,28 +46,22 @@ export class PostsComponent implements OnInit {
       });
 
     this.sortbarService.aClickedEvent
-      .subscribe((data: { by: string, order: boolean }) => {
-        if (data.by == "likes") {
-          this.service.sortByLikes(data.order).subscribe(
-            response => {
-              if (response.status) this.showTweets(response.data);
-            }, err => { }, () => { }
-          )
+      .subscribe((prm: { data: string, order: boolean }) => {
+        if (prm.data == "likes") {
+          console.log("likes")
+          this.sortByLikes(prm.order);
         }
-        else if (data.by == "retweets") {
-          this.service.sortByRetweets(data.order).subscribe(
-            response => {
-              if (response.status) this.showTweets(response.data);
-            }, err => { }, () => { }
-          )
+        else if (prm.data == "retweets") {
+          console.log("retweets")
+          this.sortByRetweets(prm.order);
         }
-        else if (data.by == "date") {
+        else if (prm.data == "date") {
+          console.log("date")
+          this.sortByDate(prm.order);
         }
-        this.service.sortByDate(data.order).subscribe(
-          response => {
-            if (response.status) this.showTweets(response.data);
-          }, err => { }, () => { }
-        )
+        else {
+          return;
+        }
       });
   }
 
@@ -95,5 +89,30 @@ export class PostsComponent implements OnInit {
       dyynamicTweet.retweets = element.retweets;
     });
   }
+
+  sortByLikes(order: boolean) {
+    this.service.sortByLikes(order).subscribe(
+      response => {
+        if (response.status) this.showTweets(response.data);
+      }, err => { }, () => { }
+    )
+  }
+
+  sortByRetweets(order: boolean) {
+    this.service.sortByRetweets(order).subscribe(
+      response => {
+        if (response.status) this.showTweets(response.data);
+      }, err => { }, () => { }
+    )
+  }
+
+  sortByDate(order: boolean) {
+    this.service.sortByDate(order).subscribe(
+      response => {
+        if (response.status) this.showTweets(response.data);
+      }, err => { }, () => { }
+    )
+  }
+
 
 }

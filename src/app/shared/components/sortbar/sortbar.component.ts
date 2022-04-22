@@ -16,11 +16,16 @@ export class SortbarComponent implements OnInit {
 
   order() {
     this.reverse = (!this.reverse);
-    this.sortBy(this.param);
+    this.sort();
   }
 
-  sortBy(param) {
-    this.param = param;
-    this.service.sort(param.value, this.reverse);
+  sortBy(by) {
+    this.param = by.value;
+    this.sort();
+  }
+  sort(){
+    // console.log(this.param);
+    // console.log(this.reverse);
+    this.service.sort(this.param, this.reverse);
   }
 }
