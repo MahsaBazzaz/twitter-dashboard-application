@@ -7,142 +7,32 @@ export class DashboardService {
 
   constructor() { }
 
-  tweetTimeSeries() {
-    return [
-      [
-        0,
-        5
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        2,
-        1
-      ],
-      [
-        3,
-        0
-      ],
-      [
-        4,
-        2
-      ],
-      [
-        5,
-        3
-      ],
-      [
-        6,
-        7
-      ],
-      [
-        7,
-        12
-      ],
-      [
-        8,
-        15
-      ],
-      [
-        9,
-        18
-      ],
-      [
-        10,
-        22
-      ],
-      [
-        11,
-        15
-      ],
-      [
-        12,
-        12
-      ],
-      [
-        13,
-        24
-      ],
-      [
-        14,
-        13
-      ],
-      [
-        15,
-        10
-      ],
-      [
-        16,
-        25
-      ],
-      [
-        17,
-        28
-      ],
-      [
-        18,
-        30
-      ],
-      [
-        19,
-        14
-      ],
-      [
-        20,
-        19
-      ],
-      [
-        21,
-        13
-      ],
-      [
-        22,
-        10
-      ],
-      [
-        23,
-        6
-      ],
-    ]
+  tweetTimeSeries(): number[][] {
+    let t = [[1, 2], [3, 4]];
+    return t;
   }
 
-  wordCloudData() {
-    return [{
-      name: 'Lorem',
-      weight: 3
-    }, {
-      name: 'Ipsum',
-      weight: 2
-    }, {
-      name: 'Dolor',
-      weight: 1
-    }]
+  wordCloudData(): { name: string; weight: number; }[] {
+    let t = [{ name: "mahsa", weight: 2 }];
+    return t;
   }
 
-  topUsers() {
-    let users: string[] = [
-      "mahsa", "mahsa", "mahsa"
-    ];
-    return users;
+  topUsers(): string[] {
+    let t = ["mahsa"];
+    return t;
   }
 
-  topKeywords() {
-    let keywords: string[] = [
-      "security", "cybercriminal", "malware"
-    ];
-    return keywords;
+  topKeywords(): string[] {
+    let t = ["mahsa"];
+    return t;
   }
 
-  topTweets() {
-    let tweets: string[] = [
-      "hi malware!", "this is a sample tweet with top security info.", "don't come after me i'm a hacker."
-    ];
-    return tweets;
+  topTweets(): string[] {
+    let t = ["mahsa"];
+    return t;
   }
 
-  cards() {
-    return [71, 78, 39, 66];
-  }
+  // cards() {
+  //   return [71, 78, 39, 66];
+  // }
 }

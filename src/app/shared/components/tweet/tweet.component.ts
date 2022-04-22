@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-tweet',
   template: `<mat-card class="example-card">
   <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+      <img mat-card-avatar src={{imageUrl}}>
       <mat-card-title>{{ username }}</mat-card-title>
       <mat-card-subtitle>{{ time }}</mat-card-subtitle>
   </mat-card-header>
@@ -12,8 +12,8 @@ import { Component, Input, OnInit } from '@angular/core';
       <p>{{ tweet }}</p>
   </mat-card-content>
   <mat-card-actions>
-      <button mat-button><mat-icon>favorite</mat-icon>{{ likes }}</button>
-      <button mat-button><mat-icon>find_replace</mat-icon>{{ retweets }}</button>
+      <mat-icon>favorite</mat-icon>{{ likes }}
+      <mat-icon>find_replace</mat-icon>{{ retweets }}
   </mat-card-actions>
 </mat-card>
 <br>`,
@@ -27,6 +27,7 @@ export class TweetComponent implements OnInit {
   @Input() likes: number = 100;
   @Input() retweets: number = 10;
   @Input() time: string = "4-19-2022";
+  @Input() imageUrl: string = 'https://material.angular.io/assets/img/examples/shiba2.jpg';
   ngOnInit() {
   }
 

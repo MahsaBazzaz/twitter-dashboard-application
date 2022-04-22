@@ -72,6 +72,7 @@ export class AccountsComponent implements OnInit {
     data.forEach(element => {
       const dyynamicComponent = <UseraccountComponent>this.container.createComponent(this.componentFactory).instance;
       dyynamicComponent.username = element.username;
+      dyynamicComponent.imageUrl = element.image_url;
       dyynamicComponent.aClickedEvent.subscribe((data: string) => {
         this.service.remove(data).subscribe(
           response => {

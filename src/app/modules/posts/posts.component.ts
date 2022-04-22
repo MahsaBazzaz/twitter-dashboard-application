@@ -5,7 +5,7 @@ import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.
 import { SortbarService } from 'src/app/shared/components/sortbar/sortbar.service';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { TweetComponent } from 'src/app/shared/components/tweet/tweet.component';
-import { Tweet } from 'src/dtos';
+import { Tweet, TweetWithImage } from 'src/dtos';
 import { PostsService } from './posts.service';
 
 @Component({
@@ -78,7 +78,7 @@ export class PostsComponent implements OnInit {
         }, err => { }, () => { })
   }
 
-  showTweets(data: Tweet[]) {
+  showTweets(data: TweetWithImage[]) {
     this.tweetsContainer.clear();
     data.forEach(element => {
       const dyynamicTweet = <TweetComponent>this.tweetsContainer.createComponent(this.tweetFactory).instance;
@@ -87,6 +87,8 @@ export class PostsComponent implements OnInit {
       dyynamicTweet.tweet = element.text;
       dyynamicTweet.likes = element.likes;
       dyynamicTweet.retweets = element.retweets;
+      dyynamicTweet.time = element.created_at;
+      dyynamicTweet.imageUrl = element.image_url
     });
   }
 
