@@ -13,9 +13,9 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
 
   @ViewChild("wordCloud", { read: ViewContainerRef, static: true }) wordCloud: ViewContainerRef;
-  @ViewChild("timeSeries", { read: ViewContainerRef, static: true }) timeSeries: ViewContainerRef;
+  // @ViewChild("timeSeries", { read: ViewContainerRef, static: true }) timeSeries: ViewContainerRef;
   wordCloudFactory: ComponentFactory<WordcloudComponent>;
-  timeSeriesFactory: ComponentFactory<AreaComponent>;
+  // timeSeriesFactory: ComponentFactory<AreaComponent>;
 
   topUserCol: string[] = ['name'];
   topKeywordCol: string[] = ['keyword'];
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.wordCloudFactory = this.componentFactoryResolver.resolveComponentFactory(WordcloudComponent);
-    this.timeSeriesFactory = this.componentFactoryResolver.resolveComponentFactory(AreaComponent);
+    // this.timeSeriesFactory = this.componentFactoryResolver.resolveComponentFactory(AreaComponent);
     this.showWordCloud();
 
     // this.dashboardService.tweetTimeSeries().subscribe((data) => {
@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
   }
 
   showTimeSeries(data: number[][]) {
-    this.timeSeries.clear();
+    // this.timeSeries.clear();
     // const dyynamicTimeSeries = <AreaComponent>this.timeSeries.createComponent(this.timeSeriesFactory).instance;
     // dyynamicTimeSeries.data = data;
     // dyynamicTimeSeries.ngOnInit();

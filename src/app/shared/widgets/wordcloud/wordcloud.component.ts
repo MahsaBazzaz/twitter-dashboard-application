@@ -9,57 +9,49 @@ wordcloud(Highcharts);
 
 @Component({
   selector: 'app-wordcloud',
-  template: `<highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" style="width: 100%; height: 300px; display: block;"></highcharts-chart>`,
+  template: `<div id="container"></div>`,
   styleUrls: ['./wordcloud.component.scss']
 })
 export class WordcloudComponent {
-  chartOptions: {};
-  @Input() data: { name: string; weight: number; }[] = [];
+
   Highcharts = Highcharts;
 
   constructor(private cdr: ChangeDetectorRef, private dashboardService: DashboardService) { }
 
-  chartRef: Highcharts.Chart;
-
-  chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
-    this.chartRef = chart;
-  };
-
-  fetchData(): Observable<ResponseSchema<Token[]>> {
-    return this.dashboardService.wordCloudData();
-  }
-
-  chartLazyLoading: Highcharts.Options = {
-    chart: {
-      type: 'wordcloud',
-      
-      events: {
-        load: () => {
-          const chart = this.chartRef;
-          const data = this.fetchData()
-            .subscribe((data: ResponseSchema<Token[]>) => {
-              let t: { name: string; weight: number; }[] = [];
-              if (data.status) {
-                data.data.forEach(element => {
-                  t.push({ name: element.token, weight: element.count });
-                });
-                chart.addSeries({
-                  type: 'wordcloud',
-                  data: t,
-                  name: 'Occurrences',
-                }, false);
-
-                chart.update({
-                  navigator: {
-                    series: {
-                      data: t
-                    }
-                  }
-                });
-              }
-            });
+  ngOnInit() {
+    const chart = Highcharts.chart('container',{
+      series: [{
+        type: 'wordcloud',
+        data: [],
+        name: 'Occurrences'
+      }],
+      title: {
+        text: 'Wordcloud of Tweets'
+      }
+    });
+    setInterval(() => {
+      console.log("updating word cloud data...");
+      this.dashboardService.wordCloudData().subscribe(data => {
+        if (data.status) {
+          data.data.forEach(element => {
+            if (!chart.series[0].data.find(x => x.name == element.token)) {
+              let t: { name: string; weight: number; } = { name: element.token, weight: element.count };
+              chart.series[0].addPoint(t);
+            }
+          });
+          this.cdr.markForCheck();
+          console.log("word cloud data updated");
         }
-      },
-    },
-  };
+      });
+    }, 5000);
+
+    HC_exporting(Highcharts);
+
+    setTimeout(() => {
+      window.dispatchEvent(
+        new Event('resize')
+      );
+    }, 300);
+
+  }
 }

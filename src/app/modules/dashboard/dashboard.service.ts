@@ -15,6 +15,7 @@ export class DashboardService {
   }
 
   wordCloudData() {
+    console.log("get word cloud data from gateway");
     return this.http.get<ResponseSchema<Token[]>>("http://127.0.0.1:3000/getMostFrequestWords");
   }
 
