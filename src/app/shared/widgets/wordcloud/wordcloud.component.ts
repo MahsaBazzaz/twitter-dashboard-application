@@ -9,17 +9,17 @@ wordcloud(Highcharts);
 
 @Component({
   selector: 'app-wordcloud',
-  template: `<div id="container"></div>`,
+  template: `<div id="wordcloud-container" style="width: 100%; height: 300px; display: block;"></div>`,
   styleUrls: ['./wordcloud.component.scss']
 })
 export class WordcloudComponent {
 
   Highcharts = Highcharts;
 
-  constructor(private cdr: ChangeDetectorRef, private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    const chart = Highcharts.chart('container',{
+    const chart = Highcharts.chart('wordcloud-container',{
       series: [{
         type: 'wordcloud',
         data: [],
@@ -30,7 +30,6 @@ export class WordcloudComponent {
       }
     });
     setInterval(() => {
-      console.log("updating word cloud data...");
       this.dashboardService.wordCloudData().subscribe(data => {
         if (data.status) {
           data.data.forEach(element => {
@@ -39,8 +38,6 @@ export class WordcloudComponent {
               chart.series[0].addPoint(t);
             }
           });
-          this.cdr.markForCheck();
-          console.log("word cloud data updated");
         }
       });
     }, 5000);

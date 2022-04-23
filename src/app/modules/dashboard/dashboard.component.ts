@@ -13,9 +13,9 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
 
   @ViewChild("wordCloud", { read: ViewContainerRef, static: true }) wordCloud: ViewContainerRef;
-  // @ViewChild("timeSeries", { read: ViewContainerRef, static: true }) timeSeries: ViewContainerRef;
+  @ViewChild("timeSeries", { read: ViewContainerRef, static: true }) timeSeries: ViewContainerRef;
   wordCloudFactory: ComponentFactory<WordcloudComponent>;
-  // timeSeriesFactory: ComponentFactory<AreaComponent>;
+  timeSeriesFactory: ComponentFactory<AreaComponent>;
 
   topUserCol: string[] = ['name'];
   topKeywordCol: string[] = ['keyword'];
@@ -36,27 +36,9 @@ export class DashboardComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.wordCloudFactory = this.componentFactoryResolver.resolveComponentFactory(WordcloudComponent);
-    // this.timeSeriesFactory = this.componentFactoryResolver.resolveComponentFactory(AreaComponent);
+    this.timeSeriesFactory = this.componentFactoryResolver.resolveComponentFactory(AreaComponent);
     this.showWordCloud();
-
-    // this.dashboardService.tweetTimeSeries().subscribe((data) => {
-    //   let t: number[][] = [];
-    //   if (data.status) {
-    //     data.data.forEach(element => {
-    //       t.push([element.hhour, element.count]);
-    //     });
-    //     this.showTimeSeries(t)
-    //   }
-    // });
-    // this.dashboardService.wordCloudData().subscribe((data) => {
-    //   let t: { name: string; weight: number; }[] = [];
-    //   if (data.status) {
-    //     data.data.forEach(element => {
-    //       t.push({ name: element.token, weight: element.count });
-    //     });
-    //     this.showWordCloud(t)
-    //   }
-    // });
+    this.showTimeSeries();
 
     // this.dashboardService.topUsers().subscribe((data) => {
     //   let t: string[] = [];
@@ -89,14 +71,10 @@ export class DashboardComponent implements OnInit {
   showWordCloud() {
     this.wordCloud.clear();
     const dyynamicWordCloud = <WordcloudComponent>this.wordCloud.createComponent(this.wordCloudFactory).instance;
-    // dyynamicWordCloud.data = data;
-    // dyynamicWordCloud.ngOnInit();
   }
 
-  showTimeSeries(data: number[][]) {
-    // this.timeSeries.clear();
-    // const dyynamicTimeSeries = <AreaComponent>this.timeSeries.createComponent(this.timeSeriesFactory).instance;
-    // dyynamicTimeSeries.data = data;
-    // dyynamicTimeSeries.ngOnInit();
+  showTimeSeries() {
+    this.timeSeries.clear();
+    const dyynamicTimeSeries = <AreaComponent>this.timeSeries.createComponent(this.timeSeriesFactory).instance;
   }
 }
