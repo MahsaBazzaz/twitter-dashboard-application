@@ -26,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { KeywordComponent } from './components/keyword/keyword.component';
 import { SortbarComponent } from './components/sortbar/sortbar.component';
+import { TopUsersComponent } from './components/top-users/top-users.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SortbarComponent } from './components/sortbar/sortbar.component';
     SpinnerComponent,
     KeywordComponent,
     SortbarComponent,
+    TopUsersComponent,
   ],
   entryComponents: [TweetComponent],
   imports: [
@@ -74,7 +76,8 @@ import { SortbarComponent } from './components/sortbar/sortbar.component';
     BasicmodalComponent,
     SpinnerComponent,
     KeywordComponent,
-    SortbarComponent
+    SortbarComponent,
+    TopUsersComponent
   ],
   bootstrap: [BasicmodalComponent]
 })

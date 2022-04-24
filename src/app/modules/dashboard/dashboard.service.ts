@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ResponseSchema, Token, Tweet } from 'src/dtos';
+import { Hero, ResponseSchema, Token, Tweet } from 'src/dtos';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  tweetTimeSeries(){
+  tweetTimeSeries() {
     return this.http.get<ResponseSchema<{ count: number; hhour: number; }[]>>("http://127.0.0.1:3000/getTweetsTimeSeries");
   }
 
@@ -23,11 +23,21 @@ export class DashboardService {
     return this.http.get<ResponseSchema<{ count: number; username: string; }[]>>("http://127.0.0.1:3000/getTopUsers");
   }
 
-  topKeywords(){
+  topKeywords() {
     return this.http.get<ResponseSchema<{ word: string, count: number }[]>>("http://127.0.0.1:3000/getTopKeywords");
   }
 
-  topTweets(){
+  topTweets() {
     return this.http.get<ResponseSchema<Tweet[]>>("http://127.0.0.1:3000/getTopKeywords");
   }
+
+  getHeroes() {
+    return this.http.get<ResponseSchema<Hero[]>>("http://127.0.0.1:3000/getHeros");
+  }
+  // addHero(hero : Hero) {
+  //   return this.http.get<ResponseSchema<Hero>>("http://127.0.0.1:3000/addHero");
+  // }
+  // deleteHero(id : number) {
+  //   return this.http.get<ResponseSchema<Hero[]>>("http://127.0.0.1:3000/deleteHero");
+  // }
 }

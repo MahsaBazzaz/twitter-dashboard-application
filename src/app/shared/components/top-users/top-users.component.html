@@ -1,0 +1,8 @@
+<h2>Top Users</h2>
+<div *ngIf="users.length>0">
+    <ul class="heroes">
+        <li *ngFor="let hero of users">
+            <a><span class="badge">{{hero.username}}</span> {{hero.count}} tweets</a>
+        </li>
+    </ul>
+</div>

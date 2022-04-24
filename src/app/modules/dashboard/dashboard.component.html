@@ -1,45 +1,26 @@
 <div #wordCloud>
+    <div #wordCloudSibling></div>
 </div>
 
 
 <div #timeSeries>
+    <div #timeSeriesSibling></div>
 </div>
 
-<!-- <br>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-    <div fxFlex="20">
-        <table mat-table [dataSource]="topUsers" class="mat-elevation-z8">
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> This Week Top Users</th>
-                <td mat-cell *matCellDef="let element"> {{element}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="topUserCol"></tr>
-            <tr mat-row *matRowDef="let row; columns: topUserCol;"></tr>
-        </table>
+
+    <div fxFlex="20" #topUsers>
+        <div #topUsersSibling></div>
     </div>
 
-    <div fxFlex="20">
-        <table mat-table [dataSource]="topKeywords" class="mat-elevation-z8">
-            <ng-container matColumnDef="keyword">
-                <th mat-header-cell *matHeaderCellDef> This Week Top Keywords </th>
-                <td mat-cell *matCellDef="let element"> {{element}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="topKeywordCol"></tr>
-            <tr mat-row *matRowDef="let row; columns: topKeywordCol;"></tr>
-        </table>
+    <div fxFlex="20" #topKeywords>
+        <div>topKeywords works</div>
     </div>
 
-    <div fxFlex="60">
-        <table mat-table [dataSource]="topTweets" class="mat-elevation-z8">
-            <ng-container matColumnDef="tweets">
-                <th mat-header-cell *matHeaderCellDef> This Week Top Tweets </th>
-                <td mat-cell *matCellDef="let element"> {{element.text}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="topTweetsCol"></tr>
-            <tr mat-row *matRowDef="let row; columns: topTweetsCol;"></tr>
-        </table>
+    <div fxFlex="60" #topTweets>
+        <div>topTweets works</div>
     </div>
-</div> -->
+</div>
 
 <br>
 <br>

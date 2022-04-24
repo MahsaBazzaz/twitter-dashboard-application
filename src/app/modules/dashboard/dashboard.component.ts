@@ -1,8 +1,9 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
+import { TopUsersComponent } from 'src/app/shared/components/top-users/top-users.component';
 import { AreaComponent } from 'src/app/shared/widgets/area/area.component';
 import { WordcloudComponent } from 'src/app/shared/widgets/wordcloud/wordcloud.component';
-import { Tweet } from 'src/dtos';
+import { Hero, Tweet } from 'src/dtos';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -12,10 +13,13 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  @ViewChild("wordCloud", { read: ViewContainerRef, static: true }) wordCloud: ViewContainerRef;
-  @ViewChild("timeSeries", { read: ViewContainerRef, static: true }) timeSeries: ViewContainerRef;
+  @ViewChild("wordCloudSibling", { read: ViewContainerRef, static: true }) wordCloud: ViewContainerRef;
+  @ViewChild("timeSeriesSibling", { read: ViewContainerRef, static: true }) timeSeries: ViewContainerRef;
+  @ViewChild("topUsersSibling", { read: ViewContainerRef, static: true }) topUsers: ViewContainerRef;
+
   wordCloudFactory: ComponentFactory<WordcloudComponent>;
   timeSeriesFactory: ComponentFactory<AreaComponent>;
+  topUsersFactory: ComponentFactory<TopUsersComponent>;
 
   topUserCol: string[] = ['name'];
   topKeywordCol: string[] = ['keyword'];
@@ -35,11 +39,15 @@ export class DashboardComponent implements OnInit {
     });
   }
   ngAfterViewInit() {
+
     this.wordCloudFactory = this.componentFactoryResolver.resolveComponentFactory(WordcloudComponent);
     this.timeSeriesFactory = this.componentFactoryResolver.resolveComponentFactory(AreaComponent);
+    this.topUsersFactory = this.componentFactoryResolver.resolveComponentFactory(TopUsersComponent);
+
     this.showWordCloud();
     this.showTimeSeries();
-
+    this.showTopUsers();
+    
     // this.dashboardService.topUsers().subscribe((data) => {
     //   let t: string[] = [];
     //   if (data.status) {
@@ -76,5 +84,10 @@ export class DashboardComponent implements OnInit {
   showTimeSeries() {
     this.timeSeries.clear();
     const dyynamicTimeSeries = <AreaComponent>this.timeSeries.createComponent(this.timeSeriesFactory).instance;
+  }
+
+  showTopUsers() {
+    this.topUsers.clear();
+    const dyynamicTimeSeries = <TopUsersComponent>this.topUsers.createComponent(this.topUsersFactory).instance;
   }
 }
