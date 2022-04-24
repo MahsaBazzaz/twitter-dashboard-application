@@ -9,9 +9,11 @@ wordcloud(Highcharts);
 
 @Component({
   selector: 'app-wordcloud',
-  template: `<div id="wordcloud-container" style="width: 100%; height: 300px; display: block;"></div>`,
+  templateUrl : './wordcloud.component.html',
   styleUrls: ['./wordcloud.component.scss']
 })
+
+
 export class WordcloudComponent {
 
   Highcharts = Highcharts;
