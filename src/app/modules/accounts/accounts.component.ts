@@ -1,7 +1,6 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.service';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
-import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { UseraccountComponent } from 'src/app/shared/components/useraccount/useraccount.component';
 import { ResponseSchema, User } from 'src/dtos';
 import { AccountsService } from './accounts.service';
@@ -21,17 +20,11 @@ export class AccountsComponent implements OnInit {
   containerRef: ViewContainerRef;
 
   constructor(private service: AccountsService,
-    private spinner: SpinnerService,
     private searchService: SearchbarService,
     private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private modalService : ModalService) { }
   ngOnInit() {
-    this.spinner.returnAsObservable().subscribe(
-      subs => {
-        this.ishttpLoaded = subs;
-      })
-
     this.searchService.aClickedEvent
       .subscribe((data: string) => {
         this.service.search(data).subscribe(

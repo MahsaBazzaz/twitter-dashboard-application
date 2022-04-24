@@ -7,15 +7,16 @@ import { Component, Input, OnInit, SimpleChange } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  @Input() loading: boolean = false;
-  @Input() httploading: boolean = false;
-
+  @Input() value : number = 100;
+  @Input() diameter: number = 100;
+  @Input() mode : string ="indeterminate";
+  @Input() strokeWidth : number = 10;
+  @Input() overlay: boolean = false;
+  @Input() color: string = "primary";
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChange) {
-    console.log(changes); 
-  }
+  
 
   ngOnInit() {
   }

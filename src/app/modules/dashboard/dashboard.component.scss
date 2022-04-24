@@ -1,9 +1,17 @@
 .stats-cards {
-  .mat-card {
-    overflow: hidden;
-  }
+    .mat-card {
+        overflow: hidden;
+    }
 }
 
 table {
-  width: 100%;
+    width: 100%;
+}
+
+.hideSpinner {
+    display: none;
+}
+
+.showSpinner {
+    display: block;
 }

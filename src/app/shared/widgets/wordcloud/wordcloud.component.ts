@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import wordcloud from 'highcharts/modules/wordcloud.js';
@@ -9,19 +9,23 @@ wordcloud(Highcharts);
 
 @Component({
   selector: 'app-wordcloud',
-  templateUrl : './wordcloud.component.html',
+  templateUrl: './wordcloud.component.html',
   styleUrls: ['./wordcloud.component.scss']
 })
 
 
 export class WordcloudComponent {
-
+  
+  @Output() aClickedEvent = new EventEmitter<boolean>();
+  isLoading : boolean = false;
   Highcharts = Highcharts;
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    const chart = Highcharts.chart('wordcloud-container',{
+    this.isLoading = true;
+    this.emitevent();
+    const chart = Highcharts.chart('wordcloud-container', {
       series: [{
         type: 'wordcloud',
         data: [],
@@ -31,7 +35,9 @@ export class WordcloudComponent {
         text: 'Wordcloud of Tweets'
       }
     });
+    
     setInterval(() => {
+      this.isLoading = true;
       this.dashboardService.wordCloudData().subscribe(data => {
         if (data.status) {
           data.data.forEach(element => {
@@ -41,6 +47,8 @@ export class WordcloudComponent {
             }
           });
         }
+        this.isLoading = false;
+        this.emitevent();
       });
     }, 5000);
 
@@ -52,5 +60,9 @@ export class WordcloudComponent {
       );
     }, 300);
 
+  }
+
+  emitevent() {
+    this.aClickedEvent.emit(this.isLoading);
   }
 }

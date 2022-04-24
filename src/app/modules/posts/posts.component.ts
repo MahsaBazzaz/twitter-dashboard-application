@@ -3,7 +3,6 @@ import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.se
 import { SearchbarComponent } from 'src/app/shared/components/searchbar/searchbar.component';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
 import { SortbarService } from 'src/app/shared/components/sortbar/sortbar.service';
-import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { TweetComponent } from 'src/app/shared/components/tweet/tweet.component';
 import { Tweet, TweetWithImage } from 'src/dtos';
 import { PostsService } from './posts.service';
@@ -18,23 +17,17 @@ export class PostsComponent implements OnInit {
   @ViewChild("container", { read: ViewContainerRef, static: true }) tweetsContainer: ViewContainerRef;
 
   name = "account"
-  ishttpLoaded: boolean = false;
-  isLoaded: boolean = false;
+  isLoading: boolean = false;
   tweetFactory: ComponentFactory<TweetComponent>;
 
   constructor(private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private service: PostsService,
     private searchbarService: SearchbarService,
-    private spinner: SpinnerService,
     private sortbarService: SortbarService) {
   }
 
   ngOnInit() {
-    this.spinner.returnAsObservable().subscribe(
-      subs => {
-        this.ishttpLoaded = subs;
-      })
 
     this.searchbarService.aClickedEvent
       .subscribe((data: string) => {
@@ -71,6 +64,7 @@ export class PostsComponent implements OnInit {
   }
 
   getAllTweets() {
+    this.isLoading = true;
     this.service.getAllTweets().
       subscribe(
         response => {
@@ -90,6 +84,7 @@ export class PostsComponent implements OnInit {
       dyynamicTweet.time = element.created_at;
       dyynamicTweet.imageUrl = element.image_url
     });
+    this.isLoading = false;
   }
 
   sortByLikes(order: boolean) {

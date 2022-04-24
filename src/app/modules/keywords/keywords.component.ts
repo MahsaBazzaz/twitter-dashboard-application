@@ -2,7 +2,6 @@ import { Component, ComponentFactory, ComponentFactoryResolver, EventEmitter, On
 import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.service';
 import { KeywordComponent } from 'src/app/shared/components/keyword/keyword.component';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
-import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { keyword } from 'src/dtos';
 import { KeywordsService } from './keywords.service';
 
@@ -25,17 +24,11 @@ export class KeywordsComponent implements OnInit {
   constructor(private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private service: KeywordsService,
-    private spinner: SpinnerService,
     private modalService : ModalService,
     private searchService: SearchbarService) {
   }
 
   ngOnInit() {
-    this.spinner.returnAsObservable().subscribe(
-      subs => {
-        this.ishttpLoaded = subs;
-      })
-
     this.searchService.aClickedEvent
       .subscribe((data: string) => {
         this.service.search(data).subscribe(

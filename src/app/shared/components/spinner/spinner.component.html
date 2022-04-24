@@ -1,4 +1,11 @@
-<!-- <img width=”100px” height=”100px” *ngIf=”loading” src=”assets/images/routedspinner.png”/>
-<img width=”100px” height=”100px” *ngIf=”httploading” src=”assets/images/httpspinner.png”/> -->
-
-<p>spinner!</p>
+<ng-container *ngIf="overlay;else progressSpinner">
+    <div class="overlay">
+        <div class="center">
+            <ng-template [ngTemplateOutlet]="progressSpinner"></ng-template>
+        </div>
+    </div>
+</ng-container>
+<ng-template #progressSpinner>
+    <mat-progress-spinner [diameter]="diameter" [mode]="mode" [color]="color" [strokeWidth]="strokeWidth" [value]="value">
+    </mat-progress-spinner>
+</ng-template>

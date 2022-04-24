@@ -1,5 +1,4 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { SpinnerService } from 'src/app/shared/components/spinner/spinner.service';
 import { TopKeywordsComponent } from 'src/app/shared/components/top-keywords/top-keywords.component';
 import { TopTweetsComponent } from 'src/app/shared/components/top-tweets/top-tweets.component';
 import { TopUsersComponent } from 'src/app/shared/components/top-users/top-users.component';
@@ -35,17 +34,14 @@ export class DashboardComponent implements OnInit {
   topKeywordsFactory: ComponentFactory<TopKeywordsComponent>;
   topTweetsFactory: ComponentFactory<TopTweetsComponent>;
 
-  ishttpLoaded: boolean = false;
-  isLoaded: boolean = false;
+  wordcloudLoading : boolean = false;
+  timeSeriesLoading : boolean = false;
+  topUserLoading : boolean = false;
 
   constructor(
-    private spinner: SpinnerService,
     private componentFactoryResolver: ComponentFactoryResolver,) { }
 
   ngOnInit() {
-    this.spinner.returnAsObservable().subscribe(subs => {
-      this.ishttpLoaded = subs;
-    });
   }
   ngAfterViewInit() {
 
@@ -65,6 +61,9 @@ export class DashboardComponent implements OnInit {
   showWordCloud() {
     this.wordCloud.clear();
     const dyynamicWordCloud = <WordcloudComponent>this.wordCloud.createComponent(this.wordCloudFactory).instance;
+    dyynamicWordCloud.aClickedEvent.subscribe((data : boolean) => {
+      this.wordcloudLoading = data;
+    });
   }
 
   showTimeSeries() {
