@@ -22,8 +22,10 @@ export class TopUsersComponent implements OnInit {
 
   getTopUsers(): void {
     this.dashboardService.topUsers()
-      .subscribe(data => {
-        this.users = data.data;
+      .subscribe(resp => {
+        if(resp.ok){
+          this.users = resp.ok.data;
+        }
       });
   }
 }

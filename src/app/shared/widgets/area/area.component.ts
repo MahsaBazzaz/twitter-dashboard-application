@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { DashboardService } from 'src/app/modules/dashboard/dashboard.service';
@@ -11,11 +11,13 @@ import { DashboardService } from 'src/app/modules/dashboard/dashboard.service';
 })
 export class AreaComponent implements OnInit {
 
+    @Output() aClickedEvent = new EventEmitter<boolean>();
     Highcharts = Highcharts;
 
     constructor(private dashboardService: DashboardService) { }
 
     ngOnInit() {
+        this.emitevent(true);
         const chart = Highcharts.chart('column-container', {
             chart: {
                 type: 'column',
@@ -55,9 +57,11 @@ export class AreaComponent implements OnInit {
                 data: []
             }],
         } as any);
+
         setInterval(() => {
+            this.emitevent(true);
             this.dashboardService.tweetTimeSeries().subscribe(data => {
-                if (data.status) {
+                if (data.ok) {
                     for (let i = chart.series[0].data.length; i >= 0; i--) {
                         chart.series[0].data.pop();
                     }
@@ -65,7 +69,7 @@ export class AreaComponent implements OnInit {
                         let t = new Highcharts.Point();
                         t.name = `${i}`;
 
-                        let tempData = data.data.find(x => x.hhour == i);
+                        let tempData = data.ok.data.find(x => x.hhour == i);
                         if (tempData != undefined) {
                             t.y = parseInt(`${tempData.count}`);
                         }
@@ -76,7 +80,7 @@ export class AreaComponent implements OnInit {
                         chart.series[0].addPoint(t);
                     }
                 }
-
+                this.emitevent(false);
             });
         }, 5000);
         HC_exporting(Highcharts);
@@ -86,5 +90,9 @@ export class AreaComponent implements OnInit {
                 new Event('resize')
             );
         }, 300);
+    }
+
+    emitevent(isLoading: boolean) {
+        this.aClickedEvent.emit(isLoading);
     }
 }

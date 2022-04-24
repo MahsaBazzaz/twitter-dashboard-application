@@ -21,8 +21,10 @@ export class TopKeywordsComponent implements OnInit {
 
   getTopKeywords(): void {
     this.dashboardService.topKeywords()
-      .subscribe(data => {
-        this.keywords = data.data;
+      .subscribe(resp => {
+        if (resp.ok) {
+          this.keywords = resp.ok.data;
+        }
       });
   }
 

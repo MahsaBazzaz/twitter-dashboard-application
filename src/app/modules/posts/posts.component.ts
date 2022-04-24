@@ -28,12 +28,12 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.isLoading = true;
     this.searchbarService.aClickedEvent
       .subscribe((data: string) => {
         this.service.search(data).subscribe(
           response => {
-            if (response.status) this.showTweets(response.data);
+            if (response.ok) this.showTweets(response.ok.data);
           }, err => { }, () => { }
         )
       });
@@ -68,11 +68,12 @@ export class PostsComponent implements OnInit {
     this.service.getAllTweets().
       subscribe(
         response => {
-          if (response.status) this.showTweets(response.data);
+          if (response.ok) this.showTweets(response.ok.data);
         }, err => { }, () => { })
   }
 
   showTweets(data: TweetWithImage[]) {
+    this.isLoading = true;
     this.tweetsContainer.clear();
     data.forEach(element => {
       const dyynamicTweet = <TweetComponent>this.tweetsContainer.createComponent(this.tweetFactory).instance;
@@ -90,7 +91,7 @@ export class PostsComponent implements OnInit {
   sortByLikes(order: boolean) {
     this.service.sortByLikes(order).subscribe(
       response => {
-        if (response.status) this.showTweets(response.data);
+        if (response.ok) this.showTweets(response.ok.data);
       }, err => { }, () => { }
     )
   }
@@ -98,7 +99,7 @@ export class PostsComponent implements OnInit {
   sortByRetweets(order: boolean) {
     this.service.sortByRetweets(order).subscribe(
       response => {
-        if (response.status) this.showTweets(response.data);
+        if (response.ok.data) this.showTweets(response.ok.data);
       }, err => { }, () => { }
     )
   }
@@ -106,7 +107,7 @@ export class PostsComponent implements OnInit {
   sortByDate(order: boolean) {
     this.service.sortByDate(order).subscribe(
       response => {
-        if (response.status) this.showTweets(response.data);
+        if (response.ok) this.showTweets(response.ok.data);
       }, err => { }, () => { }
     )
   }

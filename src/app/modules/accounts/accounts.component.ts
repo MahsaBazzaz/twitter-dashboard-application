@@ -29,7 +29,7 @@ export class AccountsComponent implements OnInit {
       .subscribe((data: string) => {
         this.service.search(data).subscribe(
           response => {
-            if (response.status) this.showUsers(response.data);
+            if (response.ok) this.showUsers(response.ok.data);
           }, err => { }, () => { }
         )
       });
@@ -38,7 +38,7 @@ export class AccountsComponent implements OnInit {
       .subscribe((data: string) => {
         this.service.add(data).subscribe(
           response => {
-            if (response.status) this.getAllUsers();
+            if (response.ok) this.getAllUsers();
           }, err => { }, () => { }
         )
       });
@@ -56,7 +56,7 @@ export class AccountsComponent implements OnInit {
     this.service.getAllUsers().
       subscribe(
         response => {
-          if (response.status) this.showUsers(response.data);
+          if (response.ok) this.showUsers(response.ok.data);
         }, err => { }, () => { })
   }
 
@@ -69,7 +69,7 @@ export class AccountsComponent implements OnInit {
       dyynamicComponent.aClickedEvent.subscribe((data: string) => {
         this.service.remove(data).subscribe(
           response => {
-            if (response.status) this.getAllUsers();
+            if (response.ok) this.getAllUsers();
           }, err => { }, () => { }
         )
       });

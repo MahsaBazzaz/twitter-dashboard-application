@@ -17,14 +17,12 @@ wordcloud(Highcharts);
 export class WordcloudComponent {
   
   @Output() aClickedEvent = new EventEmitter<boolean>();
-  isLoading : boolean = false;
   Highcharts = Highcharts;
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    this.isLoading = true;
-    this.emitevent();
+    this.emitevent(true);
     const chart = Highcharts.chart('wordcloud-container', {
       series: [{
         type: 'wordcloud',
@@ -37,18 +35,17 @@ export class WordcloudComponent {
     });
     
     setInterval(() => {
-      this.isLoading = true;
-      this.dashboardService.wordCloudData().subscribe(data => {
-        if (data.status) {
-          data.data.forEach(element => {
+      this.emitevent(true);
+      this.dashboardService.wordCloudData().subscribe(resp => {
+        if (resp.ok) {
+          resp.ok.data.forEach(element => {
             if (!chart.series[0].data.find(x => x.name == element.token)) {
               let t: { name: string; weight: number; } = { name: element.token, weight: element.count };
               chart.series[0].addPoint(t);
             }
           });
         }
-        this.isLoading = false;
-        this.emitevent();
+        this.emitevent(false);
       });
     }, 5000);
 
@@ -62,7 +59,7 @@ export class WordcloudComponent {
 
   }
 
-  emitevent() {
-    this.aClickedEvent.emit(this.isLoading);
+  emitevent(isLoading : boolean) {
+    this.aClickedEvent.emit(isLoading);
   }
 }

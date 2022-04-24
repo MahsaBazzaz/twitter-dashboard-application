@@ -68,17 +68,20 @@ export class DashboardComponent implements OnInit {
 
   showTimeSeries() {
     const dyynamicTimeSeries = <AreaComponent>this.timeSeries.createComponent(this.timeSeriesFactory).instance;
+    dyynamicTimeSeries.aClickedEvent.subscribe((data : boolean) => {
+      this.timeSeriesLoading = data;
+    });
   }
 
   showTopUsers() {
-    const dyynamicTimeSeries = <TopUsersComponent>this.topUsers.createComponent(this.topUsersFactory).instance;
+    const dyynamictopUsers = <TopUsersComponent>this.topUsers.createComponent(this.topUsersFactory).instance;
   }
 
   showTopKeywords() {
-    const dyynamicTimeSeries = <TopKeywordsComponent>this.topKeywords.createComponent(this.topKeywordsFactory).instance;
+    const dyynamictopKeywords = <TopKeywordsComponent>this.topKeywords.createComponent(this.topKeywordsFactory).instance;
   }
 
   showTopTweets() {
-    const dyynamicTimeSeries = <TopTweetsComponent>this.topTweets.createComponent(this.topTweetsFactory).instance;
+    const dyynamictopTweets = <TopTweetsComponent>this.topTweets.createComponent(this.topTweetsFactory).instance;
   }
 }

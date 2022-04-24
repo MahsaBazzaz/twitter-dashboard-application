@@ -1,6 +1,11 @@
 export interface ResponseSchema<T> {
-    status: boolean,
-    data: T
+    err?: {
+        code?: string;
+        message: string
+    },
+    ok?: {
+        data: T
+    }
 }
 
 export interface Tweet {

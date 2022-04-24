@@ -33,7 +33,7 @@ export class KeywordsComponent implements OnInit {
       .subscribe((data: string) => {
         this.service.search(data).subscribe(
           response => {
-            if (response.status) this.showKeywords(response.data);
+            if (response.ok) this.showKeywords(response.ok.data);
           }, err => { }, () => { }
         )
       });
@@ -42,7 +42,7 @@ export class KeywordsComponent implements OnInit {
       .subscribe((data: string) => {
         this.service.add(data).subscribe(
           response => {
-            if (response.status) this.getAllKeywords();
+            if (response.ok) this.getAllKeywords();
           }, err => { }, () => { }
         )
       });
@@ -59,7 +59,7 @@ export class KeywordsComponent implements OnInit {
     this.service.getAllKeywords().
       subscribe(
         response => {
-          if (response.status) this.showKeywords(response.data);
+          if (response.ok) this.showKeywords(response.ok.data);
         }, err => { }, () => { })
   }
 
@@ -72,7 +72,7 @@ export class KeywordsComponent implements OnInit {
       .subscribe((data: string) => {
         this.service.remove(data).subscribe(
           response => {
-            if (response.status) this.getAllKeywords();
+            if (response.ok) this.getAllKeywords();
           }, err => { }, () => { }
         )
       });
