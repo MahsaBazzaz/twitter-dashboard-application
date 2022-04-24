@@ -2,23 +2,21 @@
     <div #wordCloudSibling></div>
 </div>
 
-
 <div #timeSeries>
     <div #timeSeriesSibling></div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-
-    <div fxFlex="30" #topUsers>
-        <div #topUsersSibling></div>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="30" #topUsers style="display:inline;">
+        <span #topUsersSibling style="display:none;"></span>
     </div>
 
-    <div fxFlex="30" #topKeywords>
-        <div>topKeywords works</div>
+    <div fxFlex="30" #topKeywords style="display:inline;">
+        <span #topKeywordsSibling style="display:none;"></span>
     </div>
 
-    <div fxFlex="40" #topTweets>
-        <div>topTweets works</div>
+    <div fxFlex="40" #topTweets style="display:inline;">
+        <span #topTweetsSibling style="display:none;"></span>
     </div>
 </div>
 

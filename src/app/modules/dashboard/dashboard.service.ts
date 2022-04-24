@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {ResponseSchema, Token, TopUser, Tweet } from 'src/dtos';
+import {ResponseSchema, Token, TopUser, Tweet, TweetWithImage } from 'src/dtos';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,6 @@ export class DashboardService {
   }
 
   topTweets() {
-    return this.http.get<ResponseSchema<Tweet[]>>("http://127.0.0.1:3000/getTopKeywords");
+    return this.http.get<ResponseSchema<TweetWithImage[]>>("http://127.0.0.1:3000/getTopTweets");
   }
 }

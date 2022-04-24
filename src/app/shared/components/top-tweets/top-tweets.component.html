@@ -1,9 +1,10 @@
-<div id="topUsersContainer" *ngIf="users.length>0" style="display: inline-block">
+<div id="topTweetsContainer" *ngIf="tweets.length>0" style="display: inline-block">
     <h3>Top Users</h3>
     <mat-nav-list style="width: 100%;">
-        <mat-list-item *ngFor="let hero of users">
+        <mat-list-item *ngFor="let hero of tweets">
             <img matListAvatar src={{hero.image_url}}>
             <h4 mat-line>{{hero.username}}</h4>
+            <p mat-line>{{hero.text}}</p>
         </mat-list-item>
     </mat-nav-list>
 </div>

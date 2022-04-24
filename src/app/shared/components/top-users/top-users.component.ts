@@ -16,13 +16,7 @@ export class TopUsersComponent implements OnInit {
     this.getTopUsers();
 
     setInterval(() => {
-      this.dashboardService.topUsers().subscribe(data => {
-        if (data.status) {
-          this.users = data.data;
-          console.log(data.data)
-        }
-
-      });
+      this.getTopUsers();
     }, 5000);
   }
 

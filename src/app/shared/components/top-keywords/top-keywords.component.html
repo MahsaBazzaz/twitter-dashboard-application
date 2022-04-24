@@ -1,0 +1,8 @@
+<div id="topKeywordsContainer" *ngIf="keywords.length>0" style="display: inline-block">
+    <h3>Top Users</h3>
+    <mat-nav-list style="width: 100%;">
+        <mat-list-item *ngFor="let hero of keywords">
+            <h4 mat-line>{{hero.word}}</h4>
+        </mat-list-item>
+    </mat-nav-list>
+</div>

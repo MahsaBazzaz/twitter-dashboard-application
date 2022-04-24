@@ -27,6 +27,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { KeywordComponent } from './components/keyword/keyword.component';
 import { SortbarComponent } from './components/sortbar/sortbar.component';
 import { TopUsersComponent } from './components/top-users/top-users.component';
+import { TopKeywordsComponent } from './components/top-keywords/top-keywords.component';
+import { TopTweetsComponent } from './components/top-tweets/top-tweets.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { TopUsersComponent } from './components/top-users/top-users.component';
     KeywordComponent,
     SortbarComponent,
     TopUsersComponent,
+    TopKeywordsComponent,
+    TopTweetsComponent,
   ],
   entryComponents: [TweetComponent],
   imports: [
