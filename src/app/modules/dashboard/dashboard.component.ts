@@ -3,7 +3,6 @@ import { SpinnerService } from 'src/app/shared/components/spinner/spinner.servic
 import { TopUsersComponent } from 'src/app/shared/components/top-users/top-users.component';
 import { AreaComponent } from 'src/app/shared/widgets/area/area.component';
 import { WordcloudComponent } from 'src/app/shared/widgets/wordcloud/wordcloud.component';
-import { Hero, Tweet } from 'src/dtos';
 import { DashboardService } from './dashboard.service';
 
 @Component({

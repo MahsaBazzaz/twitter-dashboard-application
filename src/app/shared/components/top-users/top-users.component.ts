@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/modules/dashboard/dashboard.service';
-import { Hero, User } from 'src/dtos';
+import { TopUser } from 'src/dtos';
 
 @Component({
   selector: 'app-top-users',
@@ -8,7 +8,7 @@ import { Hero, User } from 'src/dtos';
   styleUrls: ['./top-users.component.scss']
 })
 export class TopUsersComponent implements OnInit {
-  users: { count: number; username: string; }[] = [];
+  users: TopUser[] = [];
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -19,6 +19,7 @@ export class TopUsersComponent implements OnInit {
       this.dashboardService.topUsers().subscribe(data => {
         if (data.status) {
           this.users = data.data;
+          console.log(data.data)
         }
 
       });

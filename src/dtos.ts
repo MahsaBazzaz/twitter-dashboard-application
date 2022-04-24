@@ -36,7 +36,8 @@ export interface Token {
     count: number
 }
 
-export interface Hero {
-    id: number;
-    name: string;
+export interface TopUser { 
+    count: number,
+    username: string,
+    image_url : string 
 }

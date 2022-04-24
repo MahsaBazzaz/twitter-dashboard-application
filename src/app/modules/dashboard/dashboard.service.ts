@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Hero, ResponseSchema, Token, Tweet } from 'src/dtos';
+import {ResponseSchema, Token, TopUser, Tweet } from 'src/dtos';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class DashboardService {
   }
 
   topUsers() {
-    return this.http.get<ResponseSchema<{ count: number; username: string; }[]>>("http://127.0.0.1:3000/getTopUsers");
+    return this.http.get<ResponseSchema<TopUser[]>>("http://127.0.0.1:3000/getTopUsers");
   }
 
   topKeywords() {
@@ -30,14 +30,4 @@ export class DashboardService {
   topTweets() {
     return this.http.get<ResponseSchema<Tweet[]>>("http://127.0.0.1:3000/getTopKeywords");
   }
-
-  getHeroes() {
-    return this.http.get<ResponseSchema<Hero[]>>("http://127.0.0.1:3000/getHeros");
-  }
-  // addHero(hero : Hero) {
-  //   return this.http.get<ResponseSchema<Hero>>("http://127.0.0.1:3000/addHero");
-  // }
-  // deleteHero(id : number) {
-  //   return this.http.get<ResponseSchema<Hero[]>>("http://127.0.0.1:3000/deleteHero");
-  // }
 }
