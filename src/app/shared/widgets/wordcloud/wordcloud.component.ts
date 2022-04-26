@@ -35,7 +35,7 @@ export class WordcloudComponent {
     this.update(chart);
     setInterval(() => {
       this.update(chart);
-    }, 5000);
+    }, 30000);
 
     HC_exporting(Highcharts);
 

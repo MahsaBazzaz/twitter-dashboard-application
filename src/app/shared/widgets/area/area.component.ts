@@ -62,7 +62,7 @@ export class AreaComponent implements OnInit {
         setInterval(() => {
             this.emitevent(true);
             this.update(chart);
-        }, 5000);
+        }, 30000);
         HC_exporting(Highcharts);
 
         setTimeout(() => {

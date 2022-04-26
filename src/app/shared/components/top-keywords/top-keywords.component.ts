@@ -16,7 +16,7 @@ export class TopKeywordsComponent implements OnInit {
 
     setInterval(() => {
       this.getTopKeywords();
-    }, 5000);
+    }, 30000);
   }
 
   getTopKeywords(): void {

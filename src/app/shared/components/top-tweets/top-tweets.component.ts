@@ -18,7 +18,7 @@ export class TopTweetsComponent implements OnInit {
 
     setInterval(() => {
       this.getTopTweets();
-    }, 5000);
+    }, 30000);
   }
 
   getTopTweets(): void {

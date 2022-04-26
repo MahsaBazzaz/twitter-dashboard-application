@@ -17,7 +17,7 @@ export class TopUsersComponent implements OnInit {
 
     setInterval(() => {
       this.getTopUsers();
-    }, 5000);
+    }, 30000);
   }
 
   getTopUsers(): void {

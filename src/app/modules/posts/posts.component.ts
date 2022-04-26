@@ -65,7 +65,7 @@ export class PostsComponent implements OnInit {
 
     setInterval(() => {
       this.getAllTweets();
-    }, 5000);
+    }, 30000);
   }
 
   getAllTweets() {
