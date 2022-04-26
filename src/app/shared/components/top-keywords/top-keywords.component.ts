@@ -23,7 +23,7 @@ export class TopKeywordsComponent implements OnInit {
     this.dashboardService.topKeywords()
       .subscribe(resp => {
         if (resp.ok) {
-          this.keywords = resp.ok.data;
+          this.keywords = resp.ok.data.slice(0,3);
         }
       });
   }

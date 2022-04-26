@@ -24,8 +24,8 @@ export class TopTweetsComponent implements OnInit {
   getTopTweets(): void {
     this.dashboardService.topTweets()
       .subscribe(resp => {
-        if(resp.ok){
-          this.tweets = resp.ok.data;
+        if (resp.ok) {
+          this.tweets = resp.ok.data.slice(0, 3);
         }
       });
   }

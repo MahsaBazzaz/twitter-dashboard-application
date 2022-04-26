@@ -24,7 +24,7 @@ export class TopUsersComponent implements OnInit {
     this.dashboardService.topUsers()
       .subscribe(resp => {
         if(resp.ok){
-          this.users = resp.ok.data;
+          this.users = resp.ok.data.slice(0,3);
         }
       });
   }

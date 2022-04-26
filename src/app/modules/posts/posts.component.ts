@@ -56,11 +56,16 @@ export class PostsComponent implements OnInit {
           return;
         }
       });
+
   }
 
   ngAfterViewInit() {
     this.tweetFactory = this.componentFactoryResolver.resolveComponentFactory(TweetComponent);
     this.getAllTweets();
+
+    setInterval(() => {
+      this.getAllTweets();
+    }, 5000);
   }
 
   getAllTweets() {
