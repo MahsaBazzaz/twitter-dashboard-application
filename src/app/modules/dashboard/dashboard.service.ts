@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {ResponseSchema, Token, TopUser, Tweet, TweetWithImage } from 'src/dtos';
+import { ResponseSchema, Token, TopUser, Tweet, TweetWithImage } from 'src/dtos';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,11 @@ export class DashboardService {
   wordCloudData() {
     console.log("get word cloud data from gateway");
     return this.http.get<ResponseSchema<Token[]>>("http://127.0.0.1:3000/getMostFrequestWords");
+  }
+
+  piechartData() {
+    console.log("get pie chart data from gateway");
+    return this.http.get<ResponseSchema<{ name: string, y: number }[]>>("http://127.0.0.1:3000/getVerificationStatus");
   }
 
   topUsers() {

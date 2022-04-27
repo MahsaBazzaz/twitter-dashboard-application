@@ -30,6 +30,7 @@ import { SortbarComponent } from './components/sortbar/sortbar.component';
 import { TopUsersComponent } from './components/top-users/top-users.component';
 import { TopKeywordsComponent } from './components/top-keywords/top-keywords.component';
 import { TopTweetsComponent } from './components/top-tweets/top-tweets.component';
+import { PieComponent } from './widgets/pie/pie.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { TopTweetsComponent } from './components/top-tweets/top-tweets.component
     TopUsersComponent,
     TopKeywordsComponent,
     TopTweetsComponent,
+    PieComponent,
   ],
   entryComponents: [TweetComponent],
   imports: [
@@ -83,7 +85,8 @@ import { TopTweetsComponent } from './components/top-tweets/top-tweets.component
     SpinnerComponent,
     KeywordComponent,
     SortbarComponent,
-    TopUsersComponent
+    TopUsersComponent,
+    PieComponent
   ],
   bootstrap: [BasicmodalComponent]
 })

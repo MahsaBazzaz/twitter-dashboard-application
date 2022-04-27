@@ -3,6 +3,7 @@ import { TopKeywordsComponent } from 'src/app/shared/components/top-keywords/top
 import { TopTweetsComponent } from 'src/app/shared/components/top-tweets/top-tweets.component';
 import { TopUsersComponent } from 'src/app/shared/components/top-users/top-users.component';
 import { AreaComponent } from 'src/app/shared/widgets/area/area.component';
+import { PieComponent } from 'src/app/shared/widgets/pie/pie.component';
 import { WordcloudComponent } from 'src/app/shared/widgets/wordcloud/wordcloud.component';
 import { DashboardService } from './dashboard.service';
 
@@ -28,15 +29,19 @@ export class DashboardComponent implements OnInit {
   // @ViewChild("topTweets", { read: ViewContainerRef, static: true }) topTweetsParent: ViewContainerRef;
   @ViewChild("topTweetsSibling", { read: ViewContainerRef, static: true }) topTweets: ViewContainerRef;
 
+  @ViewChild("piechartSibling", { read: ViewContainerRef, static: true }) piechart: ViewContainerRef;
+
   wordCloudFactory: ComponentFactory<WordcloudComponent>;
   timeSeriesFactory: ComponentFactory<AreaComponent>;
   topUsersFactory: ComponentFactory<TopUsersComponent>;
   topKeywordsFactory: ComponentFactory<TopKeywordsComponent>;
   topTweetsFactory: ComponentFactory<TopTweetsComponent>;
+  piechartFactory: ComponentFactory<PieComponent>;
 
-  wordcloudLoading : boolean = false;
-  timeSeriesLoading : boolean = false;
-  topUserLoading : boolean = false;
+  wordcloudLoading: boolean = false;
+  timeSeriesLoading: boolean = false;
+  topUserLoading: boolean = false;
+  piechartLoading: boolean = false;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,) { }
@@ -50,25 +55,27 @@ export class DashboardComponent implements OnInit {
     this.topUsersFactory = this.componentFactoryResolver.resolveComponentFactory(TopUsersComponent);
     this.topKeywordsFactory = this.componentFactoryResolver.resolveComponentFactory(TopKeywordsComponent);
     this.topTweetsFactory = this.componentFactoryResolver.resolveComponentFactory(TopTweetsComponent);
+    this.piechartFactory = this.componentFactoryResolver.resolveComponentFactory(PieComponent);
 
     this.showWordCloud();
     this.showTimeSeries();
     this.showTopUsers();
     this.showTopKeywords();
     this.showTopTweets();
+    this.showPiechart();
   }
 
   showWordCloud() {
     this.wordCloud.clear();
     const dyynamicWordCloud = <WordcloudComponent>this.wordCloud.createComponent(this.wordCloudFactory).instance;
-    dyynamicWordCloud.aClickedEvent.subscribe((data : boolean) => {
+    dyynamicWordCloud.aClickedEvent.subscribe((data: boolean) => {
       this.wordcloudLoading = data;
     });
   }
 
   showTimeSeries() {
     const dyynamicTimeSeries = <AreaComponent>this.timeSeries.createComponent(this.timeSeriesFactory).instance;
-    dyynamicTimeSeries.aClickedEvent.subscribe((data : boolean) => {
+    dyynamicTimeSeries.aClickedEvent.subscribe((data: boolean) => {
       this.timeSeriesLoading = data;
     });
   }
@@ -83,5 +90,12 @@ export class DashboardComponent implements OnInit {
 
   showTopTweets() {
     const dyynamictopTweets = <TopTweetsComponent>this.topTweets.createComponent(this.topTweetsFactory).instance;
+  }
+
+  showPiechart() {
+    const dyynamicpiechart = <PieComponent>this.piechart.createComponent(this.piechartFactory).instance;
+    dyynamicpiechart.aClickedEvent.subscribe((data: boolean) => {
+      this.piechartLoading = data;
+    });
   }
 }
