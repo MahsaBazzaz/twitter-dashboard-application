@@ -5,3 +5,18 @@
 .showSpinner {
     display: block;
 }
+
+.mat-card {
+    margin: 3px;
+    justify-content: center;
+    text-align: center;
+    height: 150px;
+    background: linear-gradient(45deg, rgb(217, 228, 255), rgb(230, 229, 229));
+}
+
+.mat-card-header {
+    height: 100px;
+    // background-color: rgb(224, 224, 224);
+}
+
+.mat-card-content {}

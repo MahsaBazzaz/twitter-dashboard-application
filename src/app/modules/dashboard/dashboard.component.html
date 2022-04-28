@@ -27,4 +27,45 @@
 </div>
 
 <br>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="25" #followers style="display:inline;">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Average Following Count Of Target Accounts</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{ followingAvg }}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div fxFlex="25" #following style="display:inline;">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Average Followers Count Of Target Accounts</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>{{ followersAvg }}</mat-card-content>
+        </mat-card>
+    </div>
+
+    <div fxFlex="25" #followers style="display:inline;">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Average Tweet Count Of Target Accounts</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>{{ tweetAvg }}</mat-card-content>
+        </mat-card>
+    </div>
+
+    <div fxFlex="25" #following style="display:inline;">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Average Years Of Activity Of Target Accounts</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>{{ yearsAvg }}</mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
+
+<br>
 <br>

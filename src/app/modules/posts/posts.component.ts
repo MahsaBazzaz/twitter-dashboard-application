@@ -41,15 +41,15 @@ export class PostsComponent implements OnInit {
     this.sortbarService.aClickedEvent
       .subscribe((prm: { data: string, order: boolean }) => {
         if (prm.data == "likes") {
-          console.log("likes")
+          // console.log("likes")
           this.sortByLikes(prm.order);
         }
         else if (prm.data == "retweets") {
-          console.log("retweets")
+          // console.log("retweets")
           this.sortByRetweets(prm.order);
         }
         else if (prm.data == "date") {
-          console.log("date")
+          // console.log("date")
           this.sortByDate(prm.order);
         }
         else {

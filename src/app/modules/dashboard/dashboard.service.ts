@@ -15,12 +15,10 @@ export class DashboardService {
   }
 
   wordCloudData() {
-    console.log("get word cloud data from gateway");
     return this.http.get<ResponseSchema<Token[]>>("http://127.0.0.1:3000/getMostFrequestWords");
   }
 
   piechartData() {
-    console.log("get pie chart data from gateway");
     return this.http.get<ResponseSchema<{ name: string, y: number }[]>>("http://127.0.0.1:3000/getVerificationStatus");
   }
 
@@ -34,5 +32,21 @@ export class DashboardService {
 
   topTweets() {
     return this.http.get<ResponseSchema<TweetWithImage[]>>("http://127.0.0.1:3000/getTopTweets");
+  }
+
+  followingsCount() {
+    return this.http.get<ResponseSchema<number>>("http://127.0.0.1:3000/FollowingsCount");
+  }
+
+  followersCount() {
+    return this.http.get<ResponseSchema<number>>("http://127.0.0.1:3000/FollowersCount");
+  }
+
+  tweetCount() {
+    return this.http.get<ResponseSchema<number>>("http://127.0.0.1:3000/tweetsCount");
+  }
+
+  yearsCount() {
+    return this.http.get<ResponseSchema<number>>("http://127.0.0.1:3000/yearsCount");
   }
 }

@@ -14,22 +14,14 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  // @ViewChild("wordCloud", { read: ViewContainerRef, static: true }) wordCloudParent: ViewContainerRef;
   @ViewChild("wordCloudSibling", { read: ViewContainerRef, static: true }) wordCloud: ViewContainerRef;
-
-  // @ViewChild("timeSeries", { read: ViewContainerRef, static: true }) timeSeriesParent: ViewContainerRef;
   @ViewChild("timeSeriesSibling", { read: ViewContainerRef, static: true }) timeSeries: ViewContainerRef;
-
-  // @ViewChild("topUsers", { read: ViewContainerRef, static: true }) topUsersParent: ViewContainerRef;
   @ViewChild("topUsersSibling", { read: ViewContainerRef, static: true }) topUsers: ViewContainerRef;
-
-  // @ViewChild("topKeywords", { read: ViewContainerRef, static: true }) topKeywordsParent: ViewContainerRef;
   @ViewChild("topKeywordsSibling", { read: ViewContainerRef, static: true }) topKeywords: ViewContainerRef;
-
-  // @ViewChild("topTweets", { read: ViewContainerRef, static: true }) topTweetsParent: ViewContainerRef;
   @ViewChild("topTweetsSibling", { read: ViewContainerRef, static: true }) topTweets: ViewContainerRef;
-
   @ViewChild("piechartSibling", { read: ViewContainerRef, static: true }) piechart: ViewContainerRef;
+  @ViewChild("followersSibling", { read: ViewContainerRef, static: true }) followers: ViewContainerRef;
+  @ViewChild("followingSibling", { read: ViewContainerRef, static: true }) following: ViewContainerRef;
 
   wordCloudFactory: ComponentFactory<WordcloudComponent>;
   timeSeriesFactory: ComponentFactory<AreaComponent>;
@@ -43,8 +35,14 @@ export class DashboardComponent implements OnInit {
   topUserLoading: boolean = false;
   piechartLoading: boolean = false;
 
+  followingAvg: number;
+  followersAvg: number;
+  tweetAvg: number;
+  yearsAvg: number;
+
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,) { }
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private service: DashboardService) { }
 
   ngOnInit() {
   }
@@ -63,6 +61,13 @@ export class DashboardComponent implements OnInit {
     this.showTopKeywords();
     this.showTopTweets();
     this.showPiechart();
+    this.updateCounts();
+
+    setInterval(() => {
+      this.updateCounts();
+    }, 30000);
+
+
   }
 
   showWordCloud() {
@@ -96,6 +101,33 @@ export class DashboardComponent implements OnInit {
     const dyynamicpiechart = <PieComponent>this.piechart.createComponent(this.piechartFactory).instance;
     dyynamicpiechart.aClickedEvent.subscribe((data: boolean) => {
       this.piechartLoading = data;
+    });
+  }
+
+  updateCounts() {
+    this.service.followingsCount().subscribe(data => {
+      if (data.ok) {
+        this.followingAvg = data.ok.data;
+        console.log("following : " + data.ok.data)
+      }
+    });
+    this.service.followersCount().subscribe(data => {
+      if (data.ok) {
+        this.followersAvg = data.ok.data;
+        console.log("followers : " + data.ok.data)
+      }
+    });
+    this.service.tweetCount().subscribe(data => {
+      if (data.ok) {
+        this.tweetAvg = data.ok.data;
+        console.log("tweets : " + data.ok.data)
+      }
+    });
+    this.service.yearsCount().subscribe(data => {
+      if (data.ok) {
+        this.yearsAvg = data.ok.data;
+        console.log("years : " + data.ok.data)
+      }
     });
   }
 }
