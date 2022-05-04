@@ -11,7 +11,7 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   tweetTimeSeries() {
-    return this.http.get<ResponseSchema<{ count: number; hhour: number; }[]>>("http://127.0.0.1:3000/getTweetsTimeSeries");
+    return this.http.get<ResponseSchema<{ y: number; name: number; }[]>>("http://127.0.0.1:3000/getTweetsTimeSeries");
   }
 
   wordCloudData() {
