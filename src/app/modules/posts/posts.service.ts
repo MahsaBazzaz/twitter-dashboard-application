@@ -11,8 +11,8 @@ export class PostsService {
 
     constructor(private http: HttpClient) { }
 
-    getAllTweets(): Observable<ResponseSchema<TweetWithImage[]>> {
-        return this.http.post<ResponseSchema<TweetWithImage[]>>("http://127.0.0.1:3000/getAllTweets", { "offset": 0 });
+    getAllTweets(index, size): Observable<ResponseSchema<TweetWithImage[]>> {
+        return this.http.post<ResponseSchema<TweetWithImage[]>>("http://127.0.0.1:3000/getAllTweets", { "offset": index , "size" : size });
     }
 
     search(term: string): Observable<ResponseSchema<TweetWithImage[]>> {

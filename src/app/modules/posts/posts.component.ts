@@ -1,5 +1,6 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalService } from 'src/app/shared/components/basicmodal/basicmodal.service';
+import { PaginatorDto, PaginatorService } from 'src/app/shared/components/my-custom-paginator-intl/paginator.service';
 import { SearchbarComponent } from 'src/app/shared/components/searchbar/searchbar.component';
 import { SearchbarService } from 'src/app/shared/components/searchbar/searchbar.service';
 import { SortbarService } from 'src/app/shared/components/sortbar/sortbar.service';
@@ -19,12 +20,15 @@ export class PostsComponent implements OnInit {
   name = "account"
   isLoading: boolean = false;
   tweetFactory: ComponentFactory<TweetComponent>;
+  pageIndex : number = 0;
+  size : number = 10;
 
   constructor(private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private service: PostsService,
     private searchbarService: SearchbarService,
-    private sortbarService: SortbarService) {
+    private sortbarService: SortbarService,
+    private paginatorService: PaginatorService) {
   }
 
   ngOnInit() {
@@ -61,16 +65,22 @@ export class PostsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.tweetFactory = this.componentFactoryResolver.resolveComponentFactory(TweetComponent);
-    this.getAllTweets();
+    this.getAllTweets(this.pageIndex, this.size);
+
+    this.paginatorService.aClickedEvent.subscribe((dto : PaginatorDto) => {
+      this.pageIndex = dto.index;
+      this.size = dto.size;
+      this.getAllTweets(this.pageIndex, this.size);
+    });
 
     setInterval(() => {
-      this.getAllTweets();
+      this.getAllTweets(this.pageIndex, this.size);
     }, 30000);
   }
 
-  getAllTweets() {
+  getAllTweets(index, size) {
     this.isLoading = true;
-    this.service.getAllTweets().
+    this.service.getAllTweets(index, size).
       subscribe(
         response => {
           if (response.ok) this.showTweets(response.ok.data);

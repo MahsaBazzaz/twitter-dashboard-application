@@ -1,10 +1,10 @@
 <app-spinner overlay="true" [ngClass]="isLoading ? 'showSpinner' : 'hideSpinner'"></app-spinner>
 <div fxLayout="row" gdAligns="space-between">
-    <div fxFlex="70" fxFlexAlign="start">
+    <div fxFlex="50" fxFlexAlign="start">
         <app-searchbar></app-searchbar>
     </div>
-    <div fxFlex="30" fxFlexAlign="end">
-        <app-sortbar></app-sortbar>
+    <div fxFlex="50" fxFlexAlign="end">
+        <app-my-custom-paginator-intl></app-my-custom-paginator-intl>
     </div>
 </div>
 

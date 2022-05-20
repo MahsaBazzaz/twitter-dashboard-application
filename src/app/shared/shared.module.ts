@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatCardModule } from '@angular/material';
+import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatCardModule,MatPaginatorModule } from '@angular/material';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatProgressSpinnerModule} from '@angular/material'
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -31,6 +31,7 @@ import { TopUsersComponent } from './components/top-users/top-users.component';
 import { TopKeywordsComponent } from './components/top-keywords/top-keywords.component';
 import { TopTweetsComponent } from './components/top-tweets/top-tweets.component';
 import { PieComponent } from './widgets/pie/pie.component';
+import { MyCustomPaginatorIntlComponent } from './components/my-custom-paginator-intl/my-custom-paginator-intl.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { PieComponent } from './widgets/pie/pie.component';
     TopKeywordsComponent,
     TopTweetsComponent,
     PieComponent,
+    MyCustomPaginatorIntlComponent,
   ],
   entryComponents: [TweetComponent],
   imports: [
@@ -70,7 +72,8 @@ import { PieComponent } from './widgets/pie/pie.component';
     NgbModule,
     BrowserModule,
     MatButtonToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   exports: [
     HeaderComponent,
@@ -86,7 +89,8 @@ import { PieComponent } from './widgets/pie/pie.component';
     KeywordComponent,
     SortbarComponent,
     TopUsersComponent,
-    PieComponent
+    PieComponent,
+    MyCustomPaginatorIntlComponent
   ],
   bootstrap: [BasicmodalComponent]
 })
