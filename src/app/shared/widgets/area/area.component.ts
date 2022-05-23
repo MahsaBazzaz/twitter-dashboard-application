@@ -75,35 +75,52 @@ export class AreaComponent implements OnInit {
     update(chart) {
         this.dashboardService.tweetTimeSeries().subscribe(response => {
             if (response.ok) {
-                // for (let i = chart.series[0].data.length; i >= 0; i--) {
-                //     chart.series[0].data.pop();
+                // while (chart.series[0].length > 0)
+                // chart.series[0].remove(false);
+
+                // for (let i = 0; i < 24; i++) {
+                //     let t = new Highcharts.Point();
+                //     t.name = `${i}`;
+
+                //     let tempData = response.ok.data.find(x => x.name == i);
+                //     if (tempData != undefined) {
+                //         t.y = parseInt(`${tempData.y}`);
+                //     }
+                //     else {
+                //         t.y = 0;
+                //     }
+                //     chart.series[0].addPoint(t);
                 // }
-                chart.series[0].data = [];
-                chart.series[0].points = [];
-                chart.series[0].xdata = [];
-                chart.series[0].xData = [];
-                chart.series[0].ydata = [];
-                chart.series[0].yData = [];
-                // response.ok.data.forEach(element => {
-                //     chart.series[0].addPoint(element);
-                // });
 
-
+                let newData = [];
 
                 for (let i = 0; i < 24; i++) {
-                    let t = new Highcharts.Point();
-                    t.name = `${i}`;
-
                     let tempData = response.ok.data.find(x => x.name == i);
                     if (tempData != undefined) {
-                        t.y = parseInt(`${tempData.y}`);
+                        newData.push({ name: `${i}`, y: parseInt(`${tempData.y}`) });
                     }
                     else {
-                        t.y = 0;
+                        newData.push({ name: `${i}`, y: 0});
                     }
-                    chart.series[0].addPoint(t);
+                    
                 }
+
+                var seriesLength = chart.series.length;
+                var navigator;
+                for (var i = seriesLength - 1; i > -1; i--) {
+                    if (chart.series[i].name.toLowerCase() == 'navigator') {
+                        navigator = chart.series[i];
+                    } else {
+                        chart.series[i].remove();
+                    }
+                }
+
+                chart.addSeries({
+                    data: newData
+                });
+                console.log(chart.series[0].data.length)
             }
+            chart.redraw();
             this.emitevent(false);
         });
     }

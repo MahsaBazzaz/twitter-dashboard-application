@@ -15,7 +15,7 @@ import { DashboardService } from 'src/app/modules/dashboard/dashboard.service';
 })
 export class GraphComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
   data = [
     ['A', 'B'],
     ['A', 'C'],
@@ -45,7 +45,7 @@ export class GraphComponent implements OnInit {
     ['F', 'G']
   ];
   ngOnInit() {
-    Highcharts.chart('container', {
+    const chart = Highcharts.chart('container', {
       chart: {
         type: 'networkgraph',
         plotBorderWidth: 1
@@ -77,9 +77,43 @@ export class GraphComponent implements OnInit {
           }
         },
         name: 'K8',
-        data: this.data
+        data: []
       }]
     } as any);
+
+    this.update(chart);
+    setInterval(() => {
+      this.update(chart);
+    }, 30000);
+  }
+
+  update(chart) {
+
+    this.dashboardService.graphData().subscribe(resp => {
+      if (resp.ok) {
+        let newData = [];
+        
+        for (let i = 0; i < resp.ok.data.length; i++) {
+          newData.push([resp.ok.data[i].user_name, resp.ok.data[i].owner_name]);
+        }
+
+        var seriesLength = chart.series.length;
+        var navigator;
+        for (var i = seriesLength - 1; i > -1; i--) {
+          if (chart.series[i].name.toLowerCase() == 'navigator') {
+            navigator = chart.series[i];
+          } else {
+            chart.series[i].remove();
+          }
+        }
+
+        chart.addSeries({
+          data: newData
+        });
+        console.log(chart.series[0].data.length)
+      }
+      chart.redraw();
+    });
   }
 
 }

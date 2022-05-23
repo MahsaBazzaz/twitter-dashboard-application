@@ -41,8 +41,14 @@ export interface Token {
     count: number
 }
 
-export interface TopUser { 
+export interface TopUser {
     count: number,
     username: string,
-    image_url : string 
+    image_url: string
+}
+
+export interface graphDto {
+    user_name: string,
+    owner_name: string,
+    weight: string
 }

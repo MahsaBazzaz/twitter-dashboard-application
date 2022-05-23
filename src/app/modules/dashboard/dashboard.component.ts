@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     this.showTopTweets();
     this.showPiechart();
     this.updateCounts();
-    this.showGraph();
+    // this.showGraph();
 
     setInterval(() => {
       this.updateCounts();

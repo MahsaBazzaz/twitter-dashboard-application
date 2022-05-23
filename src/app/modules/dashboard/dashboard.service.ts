@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ResponseSchema, Token, TopUser, Tweet, TweetWithImage } from 'src/dtos';
+import { graphDto, ResponseSchema, Token, TopUser, Tweet, TweetWithImage } from 'src/dtos';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +48,9 @@ export class DashboardService {
 
   yearsCount() {
     return this.http.get<ResponseSchema<number>>("http://127.0.0.1:3000/yearsCount");
+  }
+
+  graphData() {
+    return this.http.get<ResponseSchema<graphDto[]>>("http://127.0.0.1:3000/graphData");
   }
 }
