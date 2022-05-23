@@ -7,6 +7,7 @@ import { SortbarService } from 'src/app/shared/components/sortbar/sortbar.servic
 import { TweetComponent } from 'src/app/shared/components/tweet/tweet.component';
 import { Tweet, TweetWithImage } from 'src/dtos';
 import { PostsService } from './posts.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-posts',
@@ -28,7 +29,8 @@ export class PostsComponent implements OnInit {
     private service: PostsService,
     private searchbarService: SearchbarService,
     private sortbarService: SortbarService,
-    private paginatorService: PaginatorService) {
+    private paginatorService: PaginatorService,
+    private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -76,6 +78,10 @@ export class PostsComponent implements OnInit {
     setInterval(() => {
       this.getAllTweets(this.pageIndex, this.size);
     }, 30000);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   getAllTweets(index, size) {

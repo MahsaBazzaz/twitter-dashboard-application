@@ -31,4 +31,5 @@ export class PostsService {
 
         return this.http.post<ResponseSchema<TweetWithImage[]>>("http://127.0.0.1:3000/sortTweetsByDate", { "order": order });
     }
+
 }

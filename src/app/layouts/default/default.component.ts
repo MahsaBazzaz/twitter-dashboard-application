@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,NgZone } from '@angular/core';
+import { DashboardService } from 'src/app/modules/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-default',
@@ -11,11 +12,14 @@ export class DefaultComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {}
+
 
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
+
+
 
 }

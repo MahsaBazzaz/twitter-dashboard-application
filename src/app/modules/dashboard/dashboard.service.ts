@@ -53,4 +53,8 @@ export class DashboardService {
   graphData() {
     return this.http.get<ResponseSchema<graphDto[]>>("http://127.0.0.1:3000/graphData");
   }
+
+  getRateStatus() : Observable<ResponseSchema<{ status: boolean, rate: number }>> {
+    return this.http.get<ResponseSchema<{ status: boolean, rate: number }>>("http://127.0.0.1:3000/getRate");
+  }
 }
