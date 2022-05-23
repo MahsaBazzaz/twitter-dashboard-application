@@ -51,14 +51,27 @@ export class WordcloudComponent {
     this.emitevent(true);
     this.dashboardService.wordCloudData().subscribe(resp => {
       if (resp.ok) {
-        resp.ok.data.forEach(element => {
-          if (!chart.series[0].data.find(x => x.name == element.token)) {
-            let t: { name: string; weight: number; } = { name: element.token, weight: element.count };
-            chart.series[0].addPoint(t);
-          }
+
+        let newData = [];
+
+        for (const d of resp.ok.data) {
+          newData.push({ name: d.token, weight: d.count });
+        }
+
+        var seriesLength = chart.series.length;
+        for (var i = seriesLength - 1; i > -1; i--) {
+          chart.series[i].remove();
+        }
+
+        chart.addSeries({
+          type: 'wordcloud',
+          data: newData,
+          name: 'Occurrences'
         });
+        console.log(chart.series[0].data.length)
       }
       this.emitevent(false);
+      chart.redraw();
     });
   }
   emitevent(isLoading: boolean) {

@@ -75,23 +75,6 @@ export class AreaComponent implements OnInit {
     update(chart) {
         this.dashboardService.tweetTimeSeries().subscribe(response => {
             if (response.ok) {
-                // while (chart.series[0].length > 0)
-                // chart.series[0].remove(false);
-
-                // for (let i = 0; i < 24; i++) {
-                //     let t = new Highcharts.Point();
-                //     t.name = `${i}`;
-
-                //     let tempData = response.ok.data.find(x => x.name == i);
-                //     if (tempData != undefined) {
-                //         t.y = parseInt(`${tempData.y}`);
-                //     }
-                //     else {
-                //         t.y = 0;
-                //     }
-                //     chart.series[0].addPoint(t);
-                // }
-
                 let newData = [];
 
                 for (let i = 0; i < 24; i++) {
@@ -100,9 +83,9 @@ export class AreaComponent implements OnInit {
                         newData.push({ name: `${i}`, y: parseInt(`${tempData.y}`) });
                     }
                     else {
-                        newData.push({ name: `${i}`, y: 0});
+                        newData.push({ name: `${i}`, y: 0 });
                     }
-                    
+
                 }
 
                 var seriesLength = chart.series.length;
@@ -116,6 +99,8 @@ export class AreaComponent implements OnInit {
                 }
 
                 chart.addSeries({
+                    name: 'Amount',
+                    type: 'column',
                     data: newData
                 });
                 console.log(chart.series[0].data.length)

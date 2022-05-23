@@ -72,18 +72,32 @@ export class PieComponent implements OnInit {
     this.emitevent(true);
     this.dashboardService.piechartData().subscribe((resp: ResponseSchema<{ name: string; y: number; }[]>) => {
       if (resp.ok) {
-        // chart.series[0].data = resp.ok.data;
-      // chart.series[0].setData(newValue, true);
+        let newData = [];
 
-        for (let i = chart.series[0].data.length; i >= 0; i--) {
-          chart.series[0].data.pop();
-        }
         for (const d of resp.ok.data) {
-          chart.series[0].addPoint({ name: d.name, y: d.y });
+          newData.push({ name: d.name, y: d.y });
         }
+
+        var seriesLength = chart.series.length;
+        var navigator;
+        for (var i = seriesLength - 1; i > -1; i--) {
+          if (chart.series[i].name.toLowerCase() == 'navigator') {
+            navigator = chart.series[i];
+          } else {
+            chart.series[i].remove();
+          }
+        }
+
+        chart.addSeries({
+          name: 'Accounts',
+          colorByPoint: true,
+          data: newData
+        });
+        console.log(chart.series[0].data.length)
       }
 
       this.emitevent(false);
+      chart.redraw();
     });
   }
   emitevent(isLoading: boolean) {

@@ -51,7 +51,7 @@ export class GraphComponent implements OnInit {
         plotBorderWidth: 1
       },
       title: {
-        text: 'Networkgraph with random initial positions'
+        text: 'The Graph Of Retweets'
       },
       plotOptions: {
         networkgraph: {
@@ -108,9 +108,26 @@ export class GraphComponent implements OnInit {
         }
 
         chart.addSeries({
+          layoutAlgorithm: {
+            enableSimulation: true,
+            initialPositions: function () {
+              var chart = this.series[0].chart,
+                width = chart.plotWidth,
+                height = chart.plotHeight;
+  
+              this.nodes.forEach(function (node) {
+                // If initial positions were set previously, use that
+                // positions. Otherwise use random position:
+                node.plotX = node.plotX === undefined ?
+                  Math.random() * width : node.plotX;
+                node.plotY = node.plotY === undefined ?
+                  Math.random() * height : node.plotY;
+              });
+            }
+          },
+          name: 'K8',
           data: newData
         });
-        console.log(chart.series[0].data.length)
       }
       chart.redraw();
     });
