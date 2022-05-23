@@ -3,6 +3,7 @@ import { TopKeywordsComponent } from 'src/app/shared/components/top-keywords/top
 import { TopTweetsComponent } from 'src/app/shared/components/top-tweets/top-tweets.component';
 import { TopUsersComponent } from 'src/app/shared/components/top-users/top-users.component';
 import { AreaComponent } from 'src/app/shared/widgets/area/area.component';
+import { GraphComponent } from 'src/app/shared/widgets/graph/graph.component';
 import { PieComponent } from 'src/app/shared/widgets/pie/pie.component';
 import { WordcloudComponent } from 'src/app/shared/widgets/wordcloud/wordcloud.component';
 import { DashboardService } from './dashboard.service';
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild("piechartSibling", { read: ViewContainerRef, static: true }) piechart: ViewContainerRef;
   @ViewChild("followersSibling", { read: ViewContainerRef, static: true }) followers: ViewContainerRef;
   @ViewChild("followingSibling", { read: ViewContainerRef, static: true }) following: ViewContainerRef;
+  @ViewChild("graphSibling", { read: ViewContainerRef, static: true }) graph: ViewContainerRef;
 
   wordCloudFactory: ComponentFactory<WordcloudComponent>;
   timeSeriesFactory: ComponentFactory<AreaComponent>;
@@ -29,6 +31,7 @@ export class DashboardComponent implements OnInit {
   topKeywordsFactory: ComponentFactory<TopKeywordsComponent>;
   topTweetsFactory: ComponentFactory<TopTweetsComponent>;
   piechartFactory: ComponentFactory<PieComponent>;
+  graphFactory: ComponentFactory<GraphComponent>;
 
   wordcloudLoading: boolean = false;
   timeSeriesLoading: boolean = false;
@@ -54,6 +57,7 @@ export class DashboardComponent implements OnInit {
     this.topKeywordsFactory = this.componentFactoryResolver.resolveComponentFactory(TopKeywordsComponent);
     this.topTweetsFactory = this.componentFactoryResolver.resolveComponentFactory(TopTweetsComponent);
     this.piechartFactory = this.componentFactoryResolver.resolveComponentFactory(PieComponent);
+    this.graphFactory = this.componentFactoryResolver.resolveComponentFactory(GraphComponent);
 
     this.showWordCloud();
     this.showTimeSeries();
@@ -62,6 +66,7 @@ export class DashboardComponent implements OnInit {
     this.showTopTweets();
     this.showPiechart();
     this.updateCounts();
+    this.showGraph();
 
     setInterval(() => {
       this.updateCounts();
@@ -102,6 +107,11 @@ export class DashboardComponent implements OnInit {
     dyynamicpiechart.aClickedEvent.subscribe((data: boolean) => {
       this.piechartLoading = data;
     });
+  }
+
+  showGraph() {
+    this.graph.clear();
+    const dyynamicgraph = <GraphComponent>this.graph.createComponent(this.graphFactory).instance;
   }
 
   updateCounts() {
