@@ -28,7 +28,7 @@ export class WordcloudComponent {
         name: 'Occurrences'
       }],
       title: {
-        text: 'Wordcloud of Tweets'
+        text: 'Wordcloud of Hashtags'
       }
     });
 

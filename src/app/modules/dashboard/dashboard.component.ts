@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
   timeSeriesLoading: boolean = false;
   topUserLoading: boolean = false;
   piechartLoading: boolean = false;
+  graphtLoading: boolean = false;
 
   followingAvg: number;
   followersAvg: number;
@@ -112,6 +113,9 @@ export class DashboardComponent implements OnInit {
   showGraph() {
     this.graph.clear();
     const dyynamicgraph = <GraphComponent>this.graph.createComponent(this.graphFactory).instance;
+    dyynamicgraph.aClickedEvent.subscribe((data: boolean) => {
+      this.graphtLoading = data;
+    });
   }
 
   updateCounts() {
