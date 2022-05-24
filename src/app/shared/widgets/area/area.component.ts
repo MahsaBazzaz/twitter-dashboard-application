@@ -89,15 +89,18 @@ export class AreaComponent implements OnInit {
                 }
 
                 var seriesLength = chart.series.length;
-                var navigator;
+                // var navigator;
+                // for (var i = seriesLength - 1; i > -1; i--) {
+                //     if (chart.series[i].name.toLowerCase() == 'navigator') {
+                //         navigator = chart.series[i];
+                //     } else {
+                //         chart.series[i].remove();
+                //     }
+                // }
+                var seriesLength = chart.series.length;
                 for (var i = seriesLength - 1; i > -1; i--) {
-                    if (chart.series[i].name.toLowerCase() == 'navigator') {
-                        navigator = chart.series[i];
-                    } else {
-                        chart.series[i].remove();
-                    }
+                  chart.series[i].remove();
                 }
-
                 chart.addSeries({
                     name: 'Amount',
                     type: 'column',

@@ -8,6 +8,7 @@ import { PieComponent } from 'src/app/shared/widgets/pie/pie.component';
 import { WordcloudComponent } from 'src/app/shared/widgets/wordcloud/wordcloud.component';
 import { DashboardService } from './dashboard.service';
 import { MatSnackBar } from '@angular/material';
+import { SnackComponent } from 'src/app/shared/components/snack/snack.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -75,18 +76,24 @@ export class DashboardComponent implements OnInit {
       // console.log("hi")
       this.service.getRateStatus().subscribe(res => {
         if (res.ok.data.status) {
-          this.openSnackBar(`Tweets Rate Are Getting higher by ${res.ok.data.rate}`, 'Dismiss');
+          this.openSnackBar(`${res.ok.data.rate} Tweet Per Hour`, 'trending_up');
         }
         else {
-          this.openSnackBar(`Tweets Rate Is  ${res.ok.data.rate}`, 'Dismiss');
+          this.openSnackBar(`${res.ok.data.rate} Tweet Per Hour`, 'trending_flat');
         }
       });
       this.updateCounts();
     }, 30000);
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+  openSnackBar(message: string, icon: string) {
+      this._snackBar.openFromComponent(SnackComponent, {
+        data: {
+          message: message,
+          icon: icon,
+          action : 'Dismiss'
+        }
+      });
   }
 
   showWordCloud() {

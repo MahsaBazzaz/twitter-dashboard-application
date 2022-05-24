@@ -33,6 +33,7 @@ import { TopTweetsComponent } from './components/top-tweets/top-tweets.component
 import { PieComponent } from './widgets/pie/pie.component';
 import { MyCustomPaginatorIntlComponent } from './components/my-custom-paginator-intl/my-custom-paginator-intl.component';
 import { GraphComponent } from './widgets/graph/graph.component';
+import { SnackComponent } from './components/snack/snack.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { GraphComponent } from './widgets/graph/graph.component';
     PieComponent,
     MyCustomPaginatorIntlComponent,
     GraphComponent,
+    SnackComponent,
   ],
   entryComponents: [TweetComponent],
   imports: [
@@ -93,7 +95,8 @@ import { GraphComponent } from './widgets/graph/graph.component';
     TopUsersComponent,
     PieComponent,
     MyCustomPaginatorIntlComponent,
-    GraphComponent
+    GraphComponent,
+    SnackComponent
   ],
   bootstrap: [BasicmodalComponent]
 })
