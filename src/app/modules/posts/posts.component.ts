@@ -21,8 +21,8 @@ export class PostsComponent implements OnInit {
   name = "account"
   isLoading: boolean = false;
   tweetFactory: ComponentFactory<TweetComponent>;
-  pageIndex : number = 0;
-  size : number = 10;
+  pageIndex: number = 0;
+  size: number = 10;
 
   constructor(private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -67,15 +67,18 @@ export class PostsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.tweetFactory = this.componentFactoryResolver.resolveComponentFactory(TweetComponent);
+    this.pageIndex = 0;
     this.getAllTweets(this.pageIndex, this.size);
 
-    this.paginatorService.aClickedEvent.subscribe((dto : PaginatorDto) => {
+    this.paginatorService.aClickedEvent.subscribe((dto: PaginatorDto) => {
       this.pageIndex = dto.index;
       this.size = dto.size;
       this.getAllTweets(this.pageIndex, this.size);
     });
 
     setInterval(() => {
+      this.pageIndex = 0;
+      this.service.aClickedEvent.emit(true);
       this.getAllTweets(this.pageIndex, this.size);
     }, 30000);
   }

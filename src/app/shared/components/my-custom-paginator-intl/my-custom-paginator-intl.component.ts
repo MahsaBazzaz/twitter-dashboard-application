@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { PostsService } from 'src/app/modules/posts/posts.service';
 import { PaginatorService } from './paginator.service';
 
 @Component({
@@ -13,11 +14,14 @@ export class MyCustomPaginatorIntlComponent {
   pageSize = 10;
   pageIndex = 0;
   pageSizeOptions = [5, 10, 25];
-  showFirstLastButtons = false;
+  showFirstLastButtons = true;
 
-  constructor(private service: PaginatorService) { }
+  constructor(private service: PaginatorService,
+    private postsService: PostsService) { }
   ngAfterViewInit() {
-
+    this.postsService.aClickedEvent.subscribe(e => {
+      this.pageIndex = 0;
+    });
     this.getTweetCount();
     setInterval(() => {
       this.getTweetCount();

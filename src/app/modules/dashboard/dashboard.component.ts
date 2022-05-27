@@ -41,10 +41,10 @@ export class DashboardComponent implements OnInit {
   piechartLoading: boolean = false;
   graphtLoading: boolean = false;
 
-  followingAvg: number;
-  followersAvg: number;
-  tweetAvg: number;
-  yearsAvg: number;
+  followingAvg: string;
+  followersAvg: string;
+  tweetAvg: string;
+  yearsAvg: string;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -87,13 +87,13 @@ export class DashboardComponent implements OnInit {
   }
 
   openSnackBar(message: string, icon: string) {
-      this._snackBar.openFromComponent(SnackComponent, {
-        data: {
-          message: message,
-          icon: icon,
-          action : 'Dismiss'
-        }
-      });
+    this._snackBar.openFromComponent(SnackComponent, {
+      data: {
+        message: message,
+        icon: icon,
+        action: 'Dismiss'
+      }
+    });
   }
 
   showWordCloud() {
@@ -141,26 +141,38 @@ export class DashboardComponent implements OnInit {
   updateCounts() {
     this.service.followingsCount().subscribe(data => {
       if (data.ok) {
-        this.followingAvg = data.ok.data;
-        console.log("following : " + data.ok.data)
+        if (data.ok.data > 1000)
+          this.followingAvg = Math.floor(data.ok.data / 1000).toString() + " K";
+        else
+          this.followingAvg = data.ok.data.toString();
+        // console.log("following : " + data.ok.data)
       }
     });
     this.service.followersCount().subscribe(data => {
       if (data.ok) {
-        this.followersAvg = data.ok.data;
-        console.log("followers : " + data.ok.data)
+        if (data.ok.data > 1000)
+          this.followersAvg = Math.floor(data.ok.data / 1000).toString() + " K";
+        else
+          this.followersAvg = data.ok.data.toString();
+        // console.log("followers : " + data.ok.data)
       }
     });
     this.service.tweetCount().subscribe(data => {
       if (data.ok) {
-        this.tweetAvg = data.ok.data;
-        console.log("tweets : " + data.ok.data)
+        if (data.ok.data > 1000)
+          this.tweetAvg = Math.floor(data.ok.data / 1000).toString() + " K";
+        else
+          this.tweetAvg = data.ok.data.toString();
+        // console.log("tweets : " + data.ok.data)
       }
     });
     this.service.yearsCount().subscribe(data => {
       if (data.ok) {
-        this.yearsAvg = data.ok.data;
-        console.log("years : " + data.ok.data)
+        if (data.ok.data > 1000)
+          this.yearsAvg = Math.floor(data.ok.data / 1000).toString() + " K";
+        else
+          this.yearsAvg = data.ok.data.toString();
+        // console.log("years : " + data.ok.data)
       }
     });
   }

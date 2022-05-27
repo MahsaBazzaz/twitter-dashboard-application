@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { graphDto, ResponseSchema, Token, TopUser, Tweet, TweetWithImage } from 'src/dtos';
 
@@ -9,6 +9,7 @@ import { graphDto, ResponseSchema, Token, TopUser, Tweet, TweetWithImage } from 
 export class DashboardService {
 
   constructor(private http: HttpClient) { }
+  
 
   tweetTimeSeries() {
     return this.http.get<ResponseSchema<{ y: number; name: number; }[]>>("http://127.0.0.1:3000/getTweetsTimeSeries");

@@ -10,9 +10,10 @@ import { ResponseSchema, Tweet, TweetWithImage, User } from 'src/dtos';
 export class PostsService {
 
     constructor(private http: HttpClient) { }
+    @Output() aClickedEvent = new EventEmitter<boolean>();
 
     getAllTweets(index, size): Observable<ResponseSchema<TweetWithImage[]>> {
-        return this.http.post<ResponseSchema<TweetWithImage[]>>("http://127.0.0.1:3000/getAllTweets", { "offset": index , "size" : size });
+        return this.http.post<ResponseSchema<TweetWithImage[]>>("http://127.0.0.1:3000/getAllTweets", { "offset": index, "size": size });
     }
 
     search(term: string): Observable<ResponseSchema<TweetWithImage[]>> {
