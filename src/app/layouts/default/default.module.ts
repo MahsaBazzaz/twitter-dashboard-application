@@ -24,6 +24,8 @@ import { TopKeywordsComponent } from 'src/app/shared/components/top-keywords/top
 import { TopTweetsComponent } from 'src/app/shared/components/top-tweets/top-tweets.component';
 import { PieComponent } from 'src/app/shared/widgets/pie/pie.component';
 import { GraphComponent } from 'src/app/shared/widgets/graph/graph.component';
+import { KeywordComponent } from 'src/app/shared/components/keyword/keyword.component';
+import { UseraccountComponent } from 'src/app/shared/components/useraccount/useraccount.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { GraphComponent } from 'src/app/shared/widgets/graph/graph.component';
     TopKeywordsComponent,
     TopTweetsComponent,
     PieComponent,
-    GraphComponent
+    GraphComponent,
+    KeywordComponent,
+    UseraccountComponent
   ],
   imports: [
     CommonModule,
